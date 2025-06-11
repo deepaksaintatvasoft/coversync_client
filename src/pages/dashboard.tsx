@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import { mockApiService, type Policy } from "@/lib/mock-data";
+import { MockApiService, type Policy } from "@/lib/mock-data";
 import { 
   FileText, User, Timer, DollarSign, Plus, CalendarDays, 
   ClipboardCheck, UserPlus, Search, BellRing, BarChart,
@@ -58,7 +58,7 @@ export default function Dashboard() {
   // Fetch recent policies
   const { data: recentPolicies, isLoading: isLoadingPolicies } = useQuery({
     queryKey: ["recent-policies"],
-    queryFn: mockApiService.getRecentPolicies,
+    queryFn: () => MockApiService.get('/api/policies'),
   });
   
   // Fetch upcoming renewals
