@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 import { UserAvatar } from "@/components/ui/user-avatar";
 import { cn } from "@/lib/utils";
-import LogoImage from "@assets/image_1743085029401.png";
+// Logo placeholder - will use text logo instead
 
 type SidebarProps = {
   user?: {

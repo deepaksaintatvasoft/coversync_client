@@ -1,5 +1,5 @@
 import React from 'react';
-import LogoImage from "@assets/image_1743085029401.png";
+// Logo placeholder - can be added later when needed
 
 interface EmailSignatureProps {
   name?: string;
