@@ -1,0 +1,37 @@
+We need to add the children display section after line 1179 and before line 1181:
+
+              )}
+              
+              {dependents.filter(d => d.relationship === "child").length > 0 && (
+                <div className="mt-6">
+                  <h3 className="text-md font-medium mb-2">Added Children</h3>
+                  <div className="space-y-2">
+                    {dependents.filter(d => d.relationship === "child").map((dependent, index) => (
+                      <div key={index} className="flex justify-between items-center p-3 border rounded-md bg-white">
+                        <div className="flex items-center">
+                          <div className="p-2 rounded-full bg-primary/10 mr-3">
+                            <Baby className="h-4 w-4 text-primary" />
+                          </div>
+                          <div>
+                            <h4 className="font-medium text-sm">{dependent.firstName} {dependent.surname}</h4>
+                            <p className="text-xs text-gray-500">
+                              Child · {dependent.dateOfBirth ? format(new Date(dependent.dateOfBirth), "PP") : "Date of birth not provided"}
+                            </p>
+                          </div>
+                        </div>
+                        <Button 
+                          variant="ghost" 
+                          size="sm" 
+                          onClick={() => removeDependentFromList(dependents.indexOf(dependent))}
+                          className="text-gray-500 hover:text-red-500 h-8 w-8 p-0"
+                        >
+                          <X className="h-4 w-4" />
+                          <span className="sr-only">Remove</span>
+                        </Button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+              
+              {dependents.filter(d => d.relationship === "spouse").length > 0 && (

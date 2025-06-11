@@ -1,0 +1,111 @@
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="dateOfBirth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Date of Birth</FormLabel>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <FormControl>
+                                    <Button
+                                      variant="outline"
+                                      className={cn(
+                                        "w-full pl-3 text-left font-normal",
+                                        !field.value && "text-muted-foreground"
+                                      )}
+                                    >
+                                      {field.value ? (
+                                        format(field.value, "PPP")
+                                      ) : (
+                                        <span>Pick a date</span>
+                                      )}
+                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    </Button>
+                                  </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                  <Calendar
+                                    mode="single"
+                                    selected={field.value}
+                                    onSelect={field.onChange}
+                                    initialFocus
+                                    disabled={(date) => date > new Date()}
+                                  />
+                                </PopoverContent>
+                              </Popover>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="idNumber"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID Number</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field} 
+                                  onChange={(e) => {
+                                    field.onChange(e);
+                                    const idNumber = e.target.value;
+                                    
+                                    // Auto-fill date of birth and gender if valid ID number
+                                    if (idNumber && idNumber.length === 13 && validateSouthAfricanID(idNumber)) {
+                                      const dateOfBirth = getDateOfBirthFromIDNumber(idNumber);
+                                      const gender = getGenderFromIDNumber(idNumber);
+                                      
+                                      if (dateOfBirth) {
+                                        dependentForm.setValue("dateOfBirth", dateOfBirth);
+                                      }
+                                      
+                                      if (gender) {
+                                        dependentForm.setValue("gender", gender);
+                                      }
+                                    }
+                                  }}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                              {field.value && (
+                                field.value.length !== 13 ? (
+                                  <p className="text-xs text-amber-600 mt-1">
+                                    South African ID must be 13 digits
+                                  </p>
+                                ) : (
+                                  <p className={validateSouthAfricanID(field.value) 
+                                    ? "text-xs text-green-600 mt-1" 
+                                    : "text-xs text-red-600 mt-1"
+                                  }>
+                                    {validateSouthAfricanID(field.value) 
+                                      ? "✓ Valid South African ID" 
+                                      : "✗ Invalid South African ID"}
+                                  </p>
+                                )
+                              )}
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="gender"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Gender</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value || ""}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select gender" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="male">Male</SelectItem>
+                                  <SelectItem value="female">Female</SelectItem>
+                                  <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />

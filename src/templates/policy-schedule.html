@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoverSync Policy Schedule</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .logo {
+            width: 80px;
+            height: auto;
+        }
+        
+        .logo-text {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 28px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #003399 0%, #0066cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-left: 10px;
+        }
+        
+        .policy-name {
+            font-size: 24px;
+            font-weight: 600;
+            color: #003399;
+            margin-bottom: 5px;
+        }
+        
+        .policy-type {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .policy-details {
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            background-color: #f9f9f9;
+        }
+        
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #003399;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #003399;
+            padding-bottom: 5px;
+        }
+        
+        .client-greeting {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+        
+        .highlight-box {
+            background-color: #e6f0ff;
+            border: 1px solid #b3d1ff;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .coverage-amount {
+            font-size: 28px;
+            font-weight: 700;
+            color: #003399;
+            margin-bottom: 5px;
+        }
+        
+        .coverage-label {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .member-coverage-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .member-coverage-item {
+            text-align: center;
+            padding: 15px;
+            border-radius: 8px;
+            background-color: #f2f7ff;
+            border: 1px solid #d9e6ff;
+        }
+        
+        .member-type {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .member-amount {
+            font-size: 20px;
+            font-weight: 700;
+            color: #003399;
+        }
+        
+        .premium-info {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .premium-amount {
+            font-size: 22px;
+            font-weight: 700;
+            color: #003399;
+        }
+        
+        .premium-details {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        
+        .info-table th {
+            background-color: #e6f0ff;
+            text-align: left;
+            padding: 10px;
+            font-weight: 600;
+            border: 1px solid #b3d1ff;
+        }
+        
+        .info-table td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+        
+        .waiting-period {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #fff8e6;
+            border: 1px solid #ffe0b3;
+            border-radius: 8px;
+        }
+        
+        .waiting-period-title {
+            font-weight: 600;
+            color: #d68c00;
+            margin-bottom: 5px;
+        }
+        
+        .contact-info {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #f2f7ff;
+            border-radius: 8px;
+        }
+        
+        .contact-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        
+        .contact-details {
+            font-size: 14px;
+        }
+        
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+        }
+        
+        .benefits-section {
+            margin: 30px 0;
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .benefit-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            color: #003399;
+        }
+        
+        .benefit-text {
+            flex: 1;
+        }
+        
+        .warning-note {
+            font-size: 12px;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        
+        .underwritten-by {
+            text-align: center;
+            font-size: 12px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTI1IDQzLjc1QzM1LjM1NTMgNDMuNzUgNDMuNzUgMzUuMzU1MyA0My43NSAyNUM0My43NSAxNC42NDQ3IDM1LjM1NTMgNi4yNSAyNSA2LjI1QzE0LjY0NDcgNi4yNSA2LjI1IDE0LjY0NDcgNi4yNSAyNUM2LjI1IDM1LjM1NTMgMTQuNjQ0NyA0My43NSAyNSA0My43NVoiIGZpbGw9IiMwMDY2RkYiIGZpbGwtb3BhY2l0eT0iMC4xIi8+CjxwYXRoIGQ9Ik0yNSAzMS4yNUMzMi4wNTEzIDMxLjI1IDM3Ljc1IDI1LjU1MTMgMzcuNzUgMTguNUMzNy43NSAxMS40NDg3IDMyLjA1MTMgNS43NSAyNSA1Ljc1QzE3Ljk0ODcgNS43NSAxMi4yNSAxMS40NDg3IDEyLjI1IDE4LjVDMTIuMjUgMjUuNTUxMyAxNy45NDg3IDMxLjI1IDI1IDMxLjI1WiIgZmlsbD0iIzAwNjZGRiIgZmlsbC1vcGFjaXR5PSIwLjIiLz4KPHBhdGggZD0iTTI1IDI1QzM0LjY2NDkgMjUgNDIuNSAxNy4xNjQ5IDQyLjUgNy41QzQyLjUgLTIuMTY0OSAzNC42NjQ5IC0xMCAyNSAtMTBDMTUuMzM1MSAtMTAgNy41IC0yLjE2NDkgNy41IDcuNUM3LjUgMTcuMTY0OSAxNS4zMzUxIDI1IDI1IDI1WiIgZmlsbD0iIzAwNjZGRiIgZmlsbC1vcGFjaXR5PSIwLjIiLz4KPHBhdGggZD0iTTI1IDQzLjc1QzM1LjM1NTMgNDMuNzUgNDMuNzUgMzUuMzU1MyA0My43NSAyNUM0My43NSAxNC42NDQ3IDM1LjM1NTMgNi4yNSAyNSA2LjI1QzE0LjY0NDcgNi4yNSA2LjI1IDE0LjY0NDcgNi4yNSAyNUM2LjI1IDM1LjM1NTMgMTQuNjQ0NyA0My43NSAyNSA0My43NVoiIHN0cm9rZT0iIzAwNjZGRiIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxwYXRoIGQ9Ik0yNSAxOC43NUM1MCAxOC43NSA0My43NSA0My43NSAyNSA0My43NUw2LjI1IDQzLjc1QzYuMjUgMjUgMCAxOC43NSAyNSAxOC43NVoiIGZpbGw9IiMwMDY2RkYiIGZpbGwtb3BhY2l0eT0iMC4yIi8+CjxwYXRoIGQ9Ik0yMi41IDEyLjVWMzQuNSIgc3Ryb2tlPSIjMDA2NkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8cGF0aCBkPSJNMjcuNSAxMi41VjM0LjUiIHN0cm9rZT0iIzAwNjZGRiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTIyLjUgMTIuNVYzNC41IiBzdHJva2U9IiMwMDY2RkYiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CjxwYXRoIGQ9Ik0yNy41IDEyLjVWMzQuNSIgc3Ryb2tlPSIjMDA2NkZGIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgo8L3N2Zz4K" alt="CoverSync Logo" class="logo">
+                <div class="logo-text">CoverSync</div>
+            </div>
+            <div class="policy-name">{{policyType}} Schedule</div>
+            <div class="underwritten-by">Underwritten by Guardrisk Life Limited, FSP 76</div>
+        </div>
+        
+        <div class="client-greeting">
+            Hi {{clientName}}!
+        </div>
+        
+        <p>Here's an overview of some of the important things about Your {{policyType}} (Policy Number: {{policyNumber}}). For more information, please refer to Your Policy Schedule and Plan Guide.</p>
+        
+        <div class="highlight-box">
+            <div class="coverage-amount">R {{totalCoverageAmount}}</div>
+            <div class="coverage-label">Total Funeral Cover</div>
+            <p>Providing financial security for you and your loved ones during difficult times.</p>
+        </div>
+        
+        <div class="section-title">Coverage Details</div>
+        
+        <div class="member-coverage-grid">
+            <div class="member-coverage-item">
+                <div class="member-type">Main Member</div>
+                <div class="member-amount">R {{mainMemberCoverage}}</div>
+            </div>
+            {{#if spouseCoverage}}
+            <div class="member-coverage-item">
+                <div class="member-type">Spouse</div>
+                <div class="member-amount">R {{spouseCoverage}}</div>
+            </div>
+            {{/if}}
+            {{#if childrenCoverage}}
+            <div class="member-coverage-item">
+                <div class="member-type">Children ({{childrenCount}})</div>
+                <div class="member-amount">R {{childrenCoverage}} each</div>
+            </div>
+            {{/if}}
+            {{#if parentsCoverage}}
+            <div class="member-coverage-item">
+                <div class="member-type">Parents</div>
+                <div class="member-amount">R {{parentsCoverage}} each</div>
+            </div>
+            {{/if}}
+            {{#if extendedCoverage}}
+            <div class="member-coverage-item">
+                <div class="member-type">Extended Family</div>
+                <div class="member-amount">R {{extendedCoverage}} each</div>
+            </div>
+            {{/if}}
+        </div>
+        
+        <div class="premium-info">
+            <div class="premium-amount">R {{premiumAmount}} monthly premium</div>
+            <div class="premium-details">Your monthly Premium of R {{premiumAmount}} is due on the {{paymentDate}} day of the month. Your policy will renew on {{renewalDate}}.</div>
+        </div>
+        
+        <div class="waiting-period">
+            <div class="waiting-period-title">Waiting Periods</div>
+            <p>A waiting period of 6 months applies for natural causes of death. No waiting period applies for accidental death. A 12-month waiting period applies for suicide.</p>
+        </div>
+        
+        <div class="section-title">Policy Details</div>
+        
+        <table class="info-table">
+            <tr>
+                <th>Policy Number</th>
+                <td>{{policyNumber}}</td>
+            </tr>
+            <tr>
+                <th>Policy Type</th>
+                <td>{{policyType}}</td>
+            </tr>
+            <tr>
+                <th>Commencement Date</th>
+                <td>{{inceptionDate}}</td>
+            </tr>
+            <tr>
+                <th>Next Renewal Date</th>
+                <td>{{renewalDate}}</td>
+            </tr>
+        </table>
+        
+        <div class="section-title">Policyholder Information</div>
+        
+        <table class="info-table">
+            <tr>
+                <th>Full Name</th>
+                <td>{{clientName}}</td>
+            </tr>
+            <tr>
+                <th>ID Number</th>
+                <td>{{idNumber}}</td>
+            </tr>
+            <tr>
+                <th>Contact Number</th>
+                <td>{{contactNumber}}</td>
+            </tr>
+            <tr>
+                <th>Email Address</th>
+                <td>{{emailAddress}}</td>
+            </tr>
+        </table>
+        
+        <div class="section-title">Beneficiary Information</div>
+        
+        <table class="info-table">
+            <tr>
+                <th>Beneficiary Name</th>
+                <th>Relationship</th>
+                <th>ID Number</th>
+                <th>Contact Number</th>
+            </tr>
+            {{#each beneficiaries}}
+            <tr>
+                <td>{{name}}</td>
+                <td>{{relationship}}</td>
+                <td>{{idNumber}}</td>
+                <td>{{contactNumber}}</td>
+            </tr>
+            {{/each}}
+        </table>
+        
+        <div class="benefits-section">
+            <div class="section-title">Additional Benefits</div>
+            
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <div class="benefit-text">24-hour claims helpline</div>
+            </div>
+            
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <div class="benefit-text">Claims paid within 48 hours after all documentation received</div>
+            </div>
+            
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <div class="benefit-text">Transportation of the deceased within South Africa</div>
+            </div>
+            
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <div class="benefit-text">Access to discounted funeral services through partner network</div>
+            </div>
+            
+            {{#if familyPlan}}
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <div class="benefit-text">Cover for up to 10 extended family members</div>
+            </div>
+            {{/if}}
+            
+            {{#if pensionerPlan}}
+            <div class="benefit-item">
+                <span class="benefit-icon">✓</span>
+                <div class="benefit-text">Reduced waiting periods for pensioners</div>
+            </div>
+            {{/if}}
+        </div>
+        
+        <div class="contact-info">
+            <div class="contact-title">Need help?</div>
+            <div class="contact-details">
+                For queries contact Us at 086 123 4567 or email info@coversync.co.za
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>This Policy Schedule, together with the Policy Terms and Conditions, forms the complete policy contract between you and the insurer.</p>
+            <p>CoverSync is an authorised financial services provider (FSP No. XXXXX)</p>
+            <div class="warning-note">
+                This is a simplified Policy Schedule for illustrative purposes. Always refer to your full Policy Terms and Conditions document for complete details.
+            </div>
+        </div>
+    </div>
+</body>
+</html>
