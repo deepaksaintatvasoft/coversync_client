@@ -33,15 +33,21 @@ export const EmailSignatureTemplate: React.FC<EmailSignatureProps> = ({
                     letterSpacing: '1px',
                     fontSize: '18px'
                   }}>
-                    <img 
-                      src={LogoImage} 
-                      alt="CoverSync Logo" 
-                      style={{ 
+                    <div style={{ 
                         width: '36px', 
                         height: '36px', 
-                        marginRight: '8px' 
-                      }} 
-                    />
+                        marginRight: '8px',
+                        backgroundColor: '#2563eb',
+                        borderRadius: '4px',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        color: 'white',
+                        fontWeight: 'bold',
+                        fontSize: '14px'
+                      }}>
+                      CS
+                    </div>
                     <span style={{
                       background: 'linear-gradient(135deg, #2563eb, #3b82f6)',
                       WebkitBackgroundClip: 'text',

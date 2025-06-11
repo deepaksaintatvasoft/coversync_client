@@ -63,7 +63,7 @@ const Sidebar = ({ user = { name: "Admin User", role: "Administrator" }, onLogou
     >
       <div className="p-4 border-b border-gray-200 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <img src={LogoImage} alt="CoverSync Logo" className="h-9 w-9" />
+          <div className="h-9 w-9 bg-blue-600 rounded flex items-center justify-center text-white font-bold text-sm">CS</div>
           {!collapsed && <h1 className="text-xl font-black bg-gradient-to-r from-blue-900 via-blue-700 to-blue-400 bg-clip-text text-transparent font-['Montserrat',_sans-serif] tracking-wider uppercase">CoverSync</h1>}
         </div>
         <button 
