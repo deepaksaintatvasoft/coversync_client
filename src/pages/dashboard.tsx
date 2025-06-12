@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient, dataService } from "@/lib/queryClient";
+import { queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { 
   FileText, User, Timer, DollarSign, Plus, CalendarDays, 
@@ -17,8 +17,8 @@ import { UpcomingRenewals } from "@/components/upcoming-renewals";
 import { Button } from "@/components/ui/button";
 import { PolicyForm } from "@/components/policy-form";
 import { PolicyDetailsDialog } from "@/components/policy-details-dialog";
-import { Policy } from "@/lib/localStorage";
-import { PolicyWithDetails } from "@shared/schema";
+import { apiRequest } from "@/lib/queryClient";
+import { type PolicyWithDetails } from "@shared/schema";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,44 +42,49 @@ export default function Dashboard() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [period, setPeriod] = useState("this-month");
   const [isPolicyFormOpen, setIsPolicyFormOpen] = useState(false);
-  const [selectedPolicy, setSelectedPolicy] = useState<any>(null);
+  const [selectedPolicy, setSelectedPolicy] = useState<PolicyWithDetails | null>(null);
   const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isPolicyDetailsOpen, setIsPolicyDetailsOpen] = useState(false);
   const [policyDetailsId, setPolicyDetailsId] = useState<number | null>(null);
   
   // Fetch dashboard stats
-  const { data: stats, isLoading: isLoadingStats } = useQuery({
-    queryKey: ["dashboard-stats"],
-    queryFn: () => dataService.getDashboardStats(),
+  const { data: stats, isLoading: isLoadingStats } = useQuery<{
+    totalPolicies: number;
+    activePolicies: number;
+    pendingRenewals: number;
+    totalRevenue: number;
+  }>({
+    queryKey: ["/api/dashboard/stats"],
   });
   
+  // Mock total claims count - in a real app this would come from an API
+  const totalClaims = 12;
+  
   // Fetch recent policies
-  const { data: recentPolicies, isLoading: isLoadingPolicies } = useQuery({
-    queryKey: ["recent-policies"],
-    queryFn: () => dataService.getRecentPolicies(),
+  const { data: recentPolicies, isLoading: isLoadingPolicies } = useQuery<PolicyWithDetails[]>({
+    queryKey: ["/api/policies/recent"],
   });
   
   // Fetch upcoming renewals
-  const { data: upcomingRenewals, isLoading: isLoadingRenewals } = useQuery({
-    queryKey: ["renewal-policies"],
-    queryFn: () => dataService.getRenewalPolicies(),
+  const { data: upcomingRenewals, isLoading: isLoadingRenewals } = useQuery<PolicyWithDetails[]>({
+    queryKey: ["/api/policies/renewals"],
   });
   
   // Fetch policy types for distribution chart
-  const { data: policyTypes, isLoading: isLoadingPolicyTypes } = useQuery({
-    queryKey: ["policy-types"],
-    queryFn: () => dataService.getPolicyTypes(),
+  const { data: policyTypes, isLoading: isLoadingPolicyTypes } = useQuery<any[]>({
+    queryKey: ["/api/policy-types"],
   });
   
   // Create policy mutation
   const createPolicy = useMutation({
     mutationFn: async (newPolicy: any) => {
-      return dataService.createPolicy(newPolicy);
+      const res = await apiRequest("POST", "/api/policies", newPolicy);
+      return res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["recent-policies"] });
-      queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
-      queryClient.invalidateQueries({ queryKey: ["renewal-policies"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/recent"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/renewals"] });
       toast({
         title: "Success",
         description: "Policy created successfully",
@@ -97,12 +102,13 @@ export default function Dashboard() {
   // Update policy mutation
   const updatePolicy = useMutation({
     mutationFn: async ({ id, data }: { id: number; data: any }) => {
-      return dataService.updatePolicy(id, data);
+      const res = await apiRequest("PUT", `/api/policies/${id}`, data);
+      return res.json();
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["recent-policies"] });
-      queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
-      queryClient.invalidateQueries({ queryKey: ["renewal-policies"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/recent"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/renewals"] });
       toast({
         title: "Success",
         description: "Policy updated successfully",
@@ -120,12 +126,13 @@ export default function Dashboard() {
   // Delete policy mutation
   const deletePolicy = useMutation({
     mutationFn: async (id: number) => {
-      return dataService.deletePolicy(id);
+      await apiRequest("DELETE", `/api/policies/${id}`);
+      return id;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["recent-policies"] });
-      queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
-      queryClient.invalidateQueries({ queryKey: ["renewal-policies"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/recent"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/renewals"] });
       toast({
         title: "Success",
         description: "Policy deleted successfully",
@@ -141,19 +148,19 @@ export default function Dashboard() {
   });
   
   // Handle editing a policy
-  const handleEditPolicy = (policy: any) => {
+  const handleEditPolicy = (policy: PolicyWithDetails) => {
     setSelectedPolicy(policy);
     setIsPolicyFormOpen(true);
   };
   
   // Handle viewing policy details
-  const handleViewPolicy = (policy: any) => {
+  const handleViewPolicy = (policy: PolicyWithDetails) => {
     setPolicyDetailsId(policy.id);
     setIsPolicyDetailsOpen(true);
   };
 
   // Handle deleting a policy
-  const handleDeletePolicy = (policy: any) => {
+  const handleDeletePolicy = (policy: PolicyWithDetails) => {
     setSelectedPolicy(policy);
     setIsDeleteDialogOpen(true);
   };
@@ -206,9 +213,8 @@ export default function Dashboard() {
     const policyTypeCounts: Record<number, number> = {};
     
     // Count policies by type
-    recentPolicies?.forEach((policy: any) => {
-      const typeId = policy.policyTypeId || 1;
-      policyTypeCounts[typeId] = (policyTypeCounts[typeId] || 0) + 1;
+    recentPolicies.forEach((policy: PolicyWithDetails) => {
+      policyTypeCounts[policy.policyTypeId] = (policyTypeCounts[policy.policyTypeId] || 0) + 1;
     });
     
     // Only include the two valid policy types: Family Plan and Pensioner Plan
@@ -350,7 +356,7 @@ export default function Dashboard() {
             
             <StatCard
               title="Total Claims"
-              value={isLoadingStats ? "Loading..." : (stats?.totalClaims || 0)}
+              value={totalClaims}
               change={{ value: 14.3, trend: "up", text: "from last month" }}
               icon={<ClipboardCheck className="h-5 w-5" />}
               iconColor="text-amber-500"
@@ -393,7 +399,7 @@ export default function Dashboard() {
             {/* Recent policies table */}
             <PoliciesTable
               title="Recent Policies"
-              policies={recentPolicies as any}
+              policies={recentPolicies}
               isLoading={isLoadingPolicies}
               onView={handleViewPolicy}
               onDelete={handleDeletePolicy}
@@ -404,7 +410,7 @@ export default function Dashboard() {
             
             {/* Upcoming renewals */}
             <UpcomingRenewals
-              renewals={upcomingRenewals as any}
+              renewals={upcomingRenewals}
               isLoading={isLoadingRenewals}
               onRenew={handleViewPolicy}
               viewAllHref="/policies?filter=upcoming"
@@ -421,12 +427,13 @@ export default function Dashboard() {
         defaultValues={selectedPolicy ? {
           policyNumber: selectedPolicy.policyNumber,
           clientId: selectedPolicy.clientId,
-          policyTypeId: selectedPolicy.policyTypeId || 1,
+          policyTypeId: selectedPolicy.policyTypeId,
           premium: selectedPolicy.premium,
-          startDate: new Date(selectedPolicy.startDate || selectedPolicy.captureDate || new Date()),
-          endDate: new Date(selectedPolicy.endDate || selectedPolicy.captureDate || new Date()),
+          startDate: new Date(selectedPolicy.captureDate),
+          endDate: new Date(selectedPolicy.captureDate),
           status: selectedPolicy.status,
-          frequency: selectedPolicy.frequency || selectedPolicy.paymentFrequency,
+          frequency: selectedPolicy.frequency,
+          renewalDate: selectedPolicy.renewalDate ? new Date(selectedPolicy.renewalDate) : null,
           notes: selectedPolicy.notes,
         } : undefined}
         isNew={!selectedPolicy}

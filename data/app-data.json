@@ -1,13 +1,13 @@
 {
-  "currentClientId": 1023,
-  "currentPolicyId": 1020,
+  "currentClientId": 1031,
+  "currentPolicyId": 1028,
   "currentDependentId": 1,
   "currentBankDetailId": 2,
   "currentPolicyDependentId": 1,
-  "currentPolicyTypeId": 255,
-  "currentUserId": 382,
-  "currentAuditLogId": 636,
-  "currentClaimId": 389,
+  "currentPolicyTypeId": 257,
+  "currentUserId": 385,
+  "currentAuditLogId": 641,
+  "currentClaimId": 392,
   "currentClaimDocumentId": 937,
   "currentClaimNoteId": 1171,
   "currentAgentId": 469,
@@ -17132,7 +17132,7 @@
         "address": "123 Main St, Anytown, CA",
         "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
         "id": 1007,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17149,7 +17149,7 @@
         "address": "456 Oak Ave, Someville, NY",
         "avatarUrl": "https://randomuser.me/api/portraits/women/56.jpg",
         "id": 1008,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17166,7 +17166,7 @@
         "address": "789 Pine Rd, Othercity, TX",
         "avatarUrl": "https://randomuser.me/api/portraits/men/45.jpg",
         "id": 1009,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17183,7 +17183,7 @@
         "address": "101 Cedar Ln, Lasttown, WA",
         "avatarUrl": "https://randomuser.me/api/portraits/women/22.jpg",
         "id": 1010,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17200,7 +17200,7 @@
         "address": "202 Elm St, Firstcity, FL",
         "avatarUrl": "https://randomuser.me/api/portraits/men/85.jpg",
         "id": 1011,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17217,7 +17217,7 @@
         "address": "303 Maple Dr, Midtown, IL",
         "avatarUrl": "https://randomuser.me/api/portraits/women/63.jpg",
         "id": 1012,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17234,7 +17234,7 @@
         "address": "404 Birch Blvd, Uptown, MA",
         "avatarUrl": "https://randomuser.me/api/portraits/men/42.jpg",
         "id": 1013,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17251,7 +17251,7 @@
         "address": "505 Willow Way, Downtown, GA",
         "avatarUrl": "https://randomuser.me/api/portraits/women/36.jpg",
         "id": 1014,
-        "createdAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17268,7 +17268,7 @@
         "address": "123 Main St, Anytown, CA",
         "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
         "id": 1015,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17285,7 +17285,7 @@
         "address": "456 Oak Ave, Someville, NY",
         "avatarUrl": "https://randomuser.me/api/portraits/women/56.jpg",
         "id": 1016,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17302,7 +17302,7 @@
         "address": "789 Pine Rd, Othercity, TX",
         "avatarUrl": "https://randomuser.me/api/portraits/men/45.jpg",
         "id": 1017,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17319,7 +17319,7 @@
         "address": "101 Cedar Ln, Lasttown, WA",
         "avatarUrl": "https://randomuser.me/api/portraits/women/22.jpg",
         "id": 1018,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17336,7 +17336,7 @@
         "address": "202 Elm St, Firstcity, FL",
         "avatarUrl": "https://randomuser.me/api/portraits/men/85.jpg",
         "id": 1019,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17353,7 +17353,7 @@
         "address": "303 Maple Dr, Midtown, IL",
         "avatarUrl": "https://randomuser.me/api/portraits/women/63.jpg",
         "id": 1020,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17370,7 +17370,7 @@
         "address": "404 Birch Blvd, Uptown, MA",
         "avatarUrl": "https://randomuser.me/api/portraits/men/42.jpg",
         "id": 1021,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -17387,7 +17387,143 @@
         "address": "505 Willow Way, Downtown, GA",
         "avatarUrl": "https://randomuser.me/api/portraits/women/36.jpg",
         "id": 1022,
-        "createdAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1023,
+      {
+        "name": "Robert Chen",
+        "email": "robert.chen@example.com",
+        "phone": "555-123-4567",
+        "address": "123 Main St, Anytown, CA",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+        "id": 1023,
+        "createdAt": "2025-06-12T08:17:57.936Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1024,
+      {
+        "name": "Emily Rodriguez",
+        "email": "emily.rodriguez@example.com",
+        "phone": "555-234-5678",
+        "address": "456 Oak Ave, Someville, NY",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/56.jpg",
+        "id": 1024,
+        "createdAt": "2025-06-12T08:17:57.936Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1025,
+      {
+        "name": "Michael Porter",
+        "email": "michael.porter@example.com",
+        "phone": "555-345-6789",
+        "address": "789 Pine Rd, Othercity, TX",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/45.jpg",
+        "id": 1025,
+        "createdAt": "2025-06-12T08:17:57.936Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1026,
+      {
+        "name": "Sophia Kim",
+        "email": "sophia.kim@example.com",
+        "phone": "555-456-7890",
+        "address": "101 Cedar Ln, Lasttown, WA",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/22.jpg",
+        "id": 1026,
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1027,
+      {
+        "name": "David Wilson",
+        "email": "david.wilson@example.com",
+        "phone": "555-567-8901",
+        "address": "202 Elm St, Firstcity, FL",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/85.jpg",
+        "id": 1027,
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1028,
+      {
+        "name": "Linda Hernandez",
+        "email": "linda.hernandez@example.com",
+        "phone": "555-678-9012",
+        "address": "303 Maple Dr, Midtown, IL",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/63.jpg",
+        "id": 1028,
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1029,
+      {
+        "name": "James Taylor",
+        "email": "james.taylor@example.com",
+        "phone": "555-789-0123",
+        "address": "404 Birch Blvd, Uptown, MA",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/42.jpg",
+        "id": 1029,
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "dateOfBirth": null,
+        "gender": null,
+        "idNumber": null,
+        "occupation": null,
+        "employerName": null
+      }
+    ],
+    [
+      1030,
+      {
+        "name": "Amanda Garcia",
+        "email": "amanda.garcia@example.com",
+        "phone": "555-890-1234",
+        "address": "505 Willow Way, Downtown, GA",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/36.jpg",
+        "id": 1030,
+        "createdAt": "2025-06-12T08:17:57.937Z",
         "dateOfBirth": null,
         "gender": null,
         "idNumber": null,
@@ -41478,13 +41614,13 @@
         "clientId": 1007,
         "policyTypeId": 251,
         "premium": 1240,
-        "captureDate": "2025-04-13T06:23:23.449Z",
-        "inceptionDate": "2025-04-18T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "captureDate": "2025-04-13T08:17:18.576Z",
+        "inceptionDate": "2025-04-18T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2026-04-13T06:23:23.449Z",
+        "renewalDate": "2026-04-13T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41502,13 +41638,13 @@
         "clientId": 1008,
         "policyTypeId": 252,
         "premium": 2850,
-        "captureDate": "2025-05-13T06:23:23.449Z",
-        "inceptionDate": "2025-05-18T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "captureDate": "2025-05-13T08:17:18.576Z",
+        "inceptionDate": "2025-05-18T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "pending",
         "frequency": "annual",
-        "renewalDate": "2026-05-13T06:23:23.449Z",
+        "renewalDate": "2026-05-13T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41526,13 +41662,13 @@
         "clientId": 1009,
         "policyTypeId": 251,
         "premium": 3600,
-        "captureDate": "2025-05-28T06:23:23.449Z",
-        "inceptionDate": "2025-06-02T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "captureDate": "2025-05-28T08:17:18.576Z",
+        "inceptionDate": "2025-06-02T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2026-05-28T06:23:23.449Z",
+        "renewalDate": "2026-05-28T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41550,13 +41686,13 @@
         "clientId": 1010,
         "policyTypeId": 252,
         "premium": 2100,
-        "captureDate": "2024-06-12T06:23:23.449Z",
-        "inceptionDate": "2024-06-17T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "captureDate": "2024-06-12T08:17:18.576Z",
+        "inceptionDate": "2024-06-17T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "expired",
         "frequency": "annual",
-        "renewalDate": "2025-06-12T06:23:23.449Z",
+        "renewalDate": "2025-06-12T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41574,13 +41710,13 @@
         "clientId": 1011,
         "policyTypeId": 251,
         "premium": 1860,
-        "captureDate": "2024-07-17T06:23:23.449Z",
-        "inceptionDate": "2024-07-22T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "captureDate": "2024-07-17T08:17:18.576Z",
+        "inceptionDate": "2024-07-22T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-15T06:23:23.449Z",
+        "renewalDate": "2025-06-15T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41598,13 +41734,13 @@
         "clientId": 1012,
         "policyTypeId": 252,
         "premium": 2450,
-        "captureDate": "2024-07-07T06:23:23.449Z",
-        "inceptionDate": "2024-07-12T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "captureDate": "2024-07-07T08:17:18.576Z",
+        "inceptionDate": "2024-07-12T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-17T06:23:23.449Z",
+        "renewalDate": "2025-06-17T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41622,13 +41758,13 @@
         "clientId": 1013,
         "policyTypeId": 251,
         "premium": 3890,
-        "captureDate": "2024-06-17T06:23:23.449Z",
-        "inceptionDate": "2024-06-22T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.450Z",
-        "updatedAt": "2025-06-12T06:23:23.450Z",
+        "captureDate": "2024-06-17T08:17:18.576Z",
+        "inceptionDate": "2024-06-22T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-13T06:23:23.449Z",
+        "renewalDate": "2025-06-13T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41646,13 +41782,13 @@
         "clientId": 1014,
         "policyTypeId": 252,
         "premium": 1740,
-        "captureDate": "2024-06-27T06:23:23.449Z",
-        "inceptionDate": "2024-07-02T06:23:23.449Z",
-        "createdAt": "2025-06-12T06:23:23.450Z",
-        "updatedAt": "2025-06-12T06:23:23.450Z",
+        "captureDate": "2024-06-27T08:17:18.576Z",
+        "inceptionDate": "2024-07-02T08:17:18.576Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-19T06:23:23.449Z",
+        "renewalDate": "2025-06-19T08:17:18.576Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41670,13 +41806,13 @@
         "clientId": 1015,
         "policyTypeId": 253,
         "premium": 1240,
-        "captureDate": "2025-04-13T06:27:03.072Z",
-        "inceptionDate": "2025-04-18T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2025-04-13T08:17:43.062Z",
+        "inceptionDate": "2025-04-18T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2026-04-13T06:27:03.072Z",
+        "renewalDate": "2026-04-13T08:17:43.062Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41694,13 +41830,13 @@
         "clientId": 1016,
         "policyTypeId": 254,
         "premium": 2850,
-        "captureDate": "2025-05-13T06:27:03.072Z",
-        "inceptionDate": "2025-05-18T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2025-05-13T08:17:43.062Z",
+        "inceptionDate": "2025-05-18T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "pending",
         "frequency": "annual",
-        "renewalDate": "2026-05-13T06:27:03.072Z",
+        "renewalDate": "2026-05-13T08:17:43.062Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41718,13 +41854,13 @@
         "clientId": 1017,
         "policyTypeId": 253,
         "premium": 3600,
-        "captureDate": "2025-05-28T06:27:03.072Z",
-        "inceptionDate": "2025-06-02T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2025-05-28T08:17:43.062Z",
+        "inceptionDate": "2025-06-02T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2026-05-28T06:27:03.072Z",
+        "renewalDate": "2026-05-28T08:17:43.062Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41742,13 +41878,13 @@
         "clientId": 1018,
         "policyTypeId": 254,
         "premium": 2100,
-        "captureDate": "2024-06-12T06:27:03.072Z",
-        "inceptionDate": "2024-06-17T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2024-06-12T08:17:43.062Z",
+        "inceptionDate": "2024-06-17T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "expired",
         "frequency": "annual",
-        "renewalDate": "2025-06-12T06:27:03.072Z",
+        "renewalDate": "2025-06-12T08:17:43.062Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41766,13 +41902,13 @@
         "clientId": 1019,
         "policyTypeId": 253,
         "premium": 1860,
-        "captureDate": "2024-07-17T06:27:03.072Z",
-        "inceptionDate": "2024-07-22T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2024-07-17T08:17:43.062Z",
+        "inceptionDate": "2024-07-22T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-15T06:27:03.072Z",
+        "renewalDate": "2025-06-15T08:17:43.062Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41790,13 +41926,13 @@
         "clientId": 1020,
         "policyTypeId": 254,
         "premium": 2450,
-        "captureDate": "2024-07-07T06:27:03.072Z",
-        "inceptionDate": "2024-07-12T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2024-07-07T08:17:43.062Z",
+        "inceptionDate": "2024-07-12T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-17T06:27:03.072Z",
+        "renewalDate": "2025-06-17T08:17:43.062Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41814,13 +41950,13 @@
         "clientId": 1021,
         "policyTypeId": 253,
         "premium": 3890,
-        "captureDate": "2024-06-17T06:27:03.072Z",
-        "inceptionDate": "2024-06-22T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2024-06-17T08:17:43.062Z",
+        "inceptionDate": "2024-06-22T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-13T06:27:03.072Z",
+        "renewalDate": "2025-06-13T08:17:43.062Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -41838,13 +41974,205 @@
         "clientId": 1022,
         "policyTypeId": 254,
         "premium": 1740,
-        "captureDate": "2024-06-27T06:27:03.072Z",
-        "inceptionDate": "2024-07-02T06:27:03.072Z",
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "captureDate": "2024-06-27T08:17:43.062Z",
+        "inceptionDate": "2024-07-02T08:17:43.062Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "status": "active",
         "frequency": "annual",
-        "renewalDate": "2025-06-19T06:27:03.072Z",
+        "renewalDate": "2025-06-19T08:17:43.062Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1020,
+      {
+        "id": 1020,
+        "policyNumber": "POL-1234",
+        "clientId": 1023,
+        "policyTypeId": 255,
+        "premium": 1240,
+        "captureDate": "2025-04-13T08:17:57.937Z",
+        "inceptionDate": "2025-04-18T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "active",
+        "frequency": "annual",
+        "renewalDate": "2026-04-13T08:17:57.937Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1021,
+      {
+        "id": 1021,
+        "policyNumber": "POL-1235",
+        "clientId": 1024,
+        "policyTypeId": 256,
+        "premium": 2850,
+        "captureDate": "2025-05-13T08:17:57.937Z",
+        "inceptionDate": "2025-05-18T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "pending",
+        "frequency": "annual",
+        "renewalDate": "2026-05-13T08:17:57.937Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1022,
+      {
+        "id": 1022,
+        "policyNumber": "POL-1236",
+        "clientId": 1025,
+        "policyTypeId": 255,
+        "premium": 3600,
+        "captureDate": "2025-05-28T08:17:57.937Z",
+        "inceptionDate": "2025-06-02T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "active",
+        "frequency": "annual",
+        "renewalDate": "2026-05-28T08:17:57.937Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1023,
+      {
+        "id": 1023,
+        "policyNumber": "POL-1237",
+        "clientId": 1026,
+        "policyTypeId": 256,
+        "premium": 2100,
+        "captureDate": "2024-06-12T08:17:57.937Z",
+        "inceptionDate": "2024-06-17T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "expired",
+        "frequency": "annual",
+        "renewalDate": "2025-06-12T08:17:57.937Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1024,
+      {
+        "id": 1024,
+        "policyNumber": "POL-0756",
+        "clientId": 1027,
+        "policyTypeId": 255,
+        "premium": 1860,
+        "captureDate": "2024-07-17T08:17:57.937Z",
+        "inceptionDate": "2024-07-22T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "active",
+        "frequency": "annual",
+        "renewalDate": "2025-06-15T08:17:57.937Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1025,
+      {
+        "id": 1025,
+        "policyNumber": "POL-0832",
+        "clientId": 1028,
+        "policyTypeId": 256,
+        "premium": 2450,
+        "captureDate": "2024-07-07T08:17:57.937Z",
+        "inceptionDate": "2024-07-12T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "active",
+        "frequency": "annual",
+        "renewalDate": "2025-06-17T08:17:57.937Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1026,
+      {
+        "id": 1026,
+        "policyNumber": "POL-0915",
+        "clientId": 1029,
+        "policyTypeId": 255,
+        "premium": 3890,
+        "captureDate": "2024-06-17T08:17:57.937Z",
+        "inceptionDate": "2024-06-22T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "active",
+        "frequency": "annual",
+        "renewalDate": "2025-06-13T08:17:57.937Z",
+        "bankDetailId": null,
+        "coverageAmount": null,
+        "deductible": null,
+        "notes": null,
+        "beneficiaries": null,
+        "additionalCoverage": null,
+        "documents": null
+      }
+    ],
+    [
+      1027,
+      {
+        "id": 1027,
+        "policyNumber": "POL-1024",
+        "clientId": 1030,
+        "policyTypeId": 256,
+        "premium": 1740,
+        "captureDate": "2024-06-27T08:17:57.937Z",
+        "inceptionDate": "2024-07-02T08:17:57.937Z",
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z",
+        "status": "active",
+        "frequency": "annual",
+        "renewalDate": "2025-06-19T08:17:57.937Z",
         "bankDetailId": null,
         "coverageAmount": null,
         "deductible": null,
@@ -44922,6 +45250,30 @@
         "coverageAmount": 15000,
         "color": "#6366f1",
         "id": 254,
+        "coverageDetails": null,
+        "eligibilityRules": null
+      }
+    ],
+    [
+      255,
+      {
+        "name": "Family Plan",
+        "description": "Comprehensive funeral coverage for the entire family",
+        "coverageAmount": 25000,
+        "color": "#3b82f6",
+        "id": 255,
+        "coverageDetails": null,
+        "eligibilityRules": null
+      }
+    ],
+    [
+      256,
+      {
+        "name": "Pensioner Plan",
+        "description": "Affordable funeral coverage designed for seniors",
+        "coverageAmount": 15000,
+        "color": "#6366f1",
+        "id": 256,
         "coverageDetails": null,
         "eligibilityRules": null
       }
@@ -51317,8 +51669,8 @@
         "role": "super_admin",
         "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
         "id": 376,
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "active": true,
         "lastLogin": null,
         "permissions": null
@@ -51334,8 +51686,8 @@
         "role": "data_capturer",
         "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
         "id": 377,
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "active": true,
         "lastLogin": null,
         "permissions": null
@@ -51351,8 +51703,8 @@
         "role": "claim_handler",
         "avatarUrl": "https://randomuser.me/api/portraits/women/28.jpg",
         "id": 378,
-        "createdAt": "2025-06-12T06:23:23.449Z",
-        "updatedAt": "2025-06-12T06:23:23.449Z",
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z",
         "active": true,
         "lastLogin": null,
         "permissions": null
@@ -51368,8 +51720,8 @@
         "role": "super_admin",
         "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
         "id": 379,
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "active": true,
         "lastLogin": null,
         "permissions": null
@@ -51385,8 +51737,8 @@
         "role": "data_capturer",
         "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
         "id": 380,
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
         "active": true,
         "lastLogin": null,
         "permissions": null
@@ -51402,8 +51754,59 @@
         "role": "claim_handler",
         "avatarUrl": "https://randomuser.me/api/portraits/women/28.jpg",
         "id": 381,
-        "createdAt": "2025-06-12T06:27:03.072Z",
-        "updatedAt": "2025-06-12T06:27:03.072Z",
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z",
+        "active": true,
+        "lastLogin": null,
+        "permissions": null
+      }
+    ],
+    [
+      382,
+      {
+        "username": "admin",
+        "password": "admin123",
+        "name": "Sarah Johnson",
+        "email": "sarah@policypro.com",
+        "role": "super_admin",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/44.jpg",
+        "id": 382,
+        "createdAt": "2025-06-12T08:17:57.936Z",
+        "updatedAt": "2025-06-12T08:17:57.936Z",
+        "active": true,
+        "lastLogin": null,
+        "permissions": null
+      }
+    ],
+    [
+      383,
+      {
+        "username": "capturer",
+        "password": "capturer123",
+        "name": "James Brown",
+        "email": "james@policypro.com",
+        "role": "data_capturer",
+        "avatarUrl": "https://randomuser.me/api/portraits/men/32.jpg",
+        "id": 383,
+        "createdAt": "2025-06-12T08:17:57.936Z",
+        "updatedAt": "2025-06-12T08:17:57.936Z",
+        "active": true,
+        "lastLogin": null,
+        "permissions": null
+      }
+    ],
+    [
+      384,
+      {
+        "username": "handler",
+        "password": "handler123",
+        "name": "Emily Rodriguez",
+        "email": "emily@policypro.com",
+        "role": "claim_handler",
+        "avatarUrl": "https://randomuser.me/api/portraits/women/28.jpg",
+        "id": 384,
+        "createdAt": "2025-06-12T08:17:57.936Z",
+        "updatedAt": "2025-06-12T08:17:57.936Z",
         "active": true,
         "lastLogin": null,
         "permissions": null
@@ -61668,7 +62071,7 @@
         "action": "create",
         "entityType": "policy",
         "entityId": "POL-1234",
-        "timestamp": "2025-06-12T06:23:23.450Z",
+        "timestamp": "2025-06-12T08:17:18.576Z",
         "details": {
           "policyTypeId": 251,
           "clientId": 1007
@@ -61685,7 +62088,7 @@
         "action": "create",
         "entityType": "policy",
         "entityId": "POL-1235",
-        "timestamp": "2025-06-12T06:23:23.450Z",
+        "timestamp": "2025-06-12T08:17:18.576Z",
         "details": {
           "policyTypeId": 252,
           "clientId": 1008
@@ -61702,7 +62105,7 @@
         "action": "login",
         "entityType": "user",
         "entityId": "1",
-        "timestamp": "2025-06-12T06:23:23.450Z",
+        "timestamp": "2025-06-12T08:17:18.576Z",
         "ipAddress": "192.168.1.1",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
         "id": 628,
@@ -61716,7 +62119,7 @@
         "action": "assign_claim",
         "entityType": "claim",
         "entityId": "CLM-001",
-        "timestamp": "2025-06-12T06:23:23.450Z",
+        "timestamp": "2025-06-12T08:17:18.576Z",
         "details": {
           "claimId": "CLM-001",
           "assignedTo": 3
@@ -61733,7 +62136,7 @@
         "action": "update_role",
         "entityType": "user",
         "entityId": "3",
-        "timestamp": "2025-06-12T06:23:23.450Z",
+        "timestamp": "2025-06-12T08:17:18.576Z",
         "details": {
           "oldRole": "data_capturer",
           "newRole": "claim_handler"
@@ -61750,7 +62153,7 @@
         "action": "create",
         "entityType": "policy",
         "entityId": "POL-1234",
-        "timestamp": "2025-06-12T06:27:03.072Z",
+        "timestamp": "2025-06-12T08:17:43.062Z",
         "details": {
           "policyTypeId": 253,
           "clientId": 1015
@@ -61767,7 +62170,7 @@
         "action": "create",
         "entityType": "policy",
         "entityId": "POL-1235",
-        "timestamp": "2025-06-12T06:27:03.073Z",
+        "timestamp": "2025-06-12T08:17:43.062Z",
         "details": {
           "policyTypeId": 254,
           "clientId": 1016
@@ -61784,7 +62187,7 @@
         "action": "login",
         "entityType": "user",
         "entityId": "1",
-        "timestamp": "2025-06-12T06:27:03.073Z",
+        "timestamp": "2025-06-12T08:17:43.062Z",
         "ipAddress": "192.168.1.1",
         "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
         "id": 633,
@@ -61798,7 +62201,7 @@
         "action": "assign_claim",
         "entityType": "claim",
         "entityId": "CLM-001",
-        "timestamp": "2025-06-12T06:27:03.073Z",
+        "timestamp": "2025-06-12T08:17:43.062Z",
         "details": {
           "claimId": "CLM-001",
           "assignedTo": 3
@@ -61815,12 +62218,94 @@
         "action": "update_role",
         "entityType": "user",
         "entityId": "3",
-        "timestamp": "2025-06-12T06:27:03.073Z",
+        "timestamp": "2025-06-12T08:17:43.062Z",
         "details": {
           "oldRole": "data_capturer",
           "newRole": "claim_handler"
         },
         "id": 635,
+        "ipAddress": null,
+        "userAgent": null
+      }
+    ],
+    [
+      636,
+      {
+        "userId": 2,
+        "action": "create",
+        "entityType": "policy",
+        "entityId": "POL-1234",
+        "timestamp": "2025-06-12T08:17:57.937Z",
+        "details": {
+          "policyTypeId": 255,
+          "clientId": 1023
+        },
+        "id": 636,
+        "ipAddress": null,
+        "userAgent": null
+      }
+    ],
+    [
+      637,
+      {
+        "userId": 2,
+        "action": "create",
+        "entityType": "policy",
+        "entityId": "POL-1235",
+        "timestamp": "2025-06-12T08:17:57.937Z",
+        "details": {
+          "policyTypeId": 256,
+          "clientId": 1024
+        },
+        "id": 637,
+        "ipAddress": null,
+        "userAgent": null
+      }
+    ],
+    [
+      638,
+      {
+        "userId": 1,
+        "action": "login",
+        "entityType": "user",
+        "entityId": "1",
+        "timestamp": "2025-06-12T08:17:57.937Z",
+        "ipAddress": "192.168.1.1",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
+        "id": 638,
+        "details": null
+      }
+    ],
+    [
+      639,
+      {
+        "userId": 3,
+        "action": "assign_claim",
+        "entityType": "claim",
+        "entityId": "CLM-001",
+        "timestamp": "2025-06-12T08:17:57.937Z",
+        "details": {
+          "claimId": "CLM-001",
+          "assignedTo": 3
+        },
+        "id": 639,
+        "ipAddress": null,
+        "userAgent": null
+      }
+    ],
+    [
+      640,
+      {
+        "userId": 1,
+        "action": "update_role",
+        "entityType": "user",
+        "entityId": "3",
+        "timestamp": "2025-06-12T08:17:57.937Z",
+        "details": {
+          "oldRole": "data_capturer",
+          "newRole": "claim_handler"
+        },
+        "id": 640,
         "ipAddress": null,
         "userAgent": null
       }
@@ -74462,7 +74947,7 @@
         "policyId": 1,
         "status": "pending",
         "dateOfIncident": null,
-        "dateOfDeath": "2025-05-28T06:23:23.449Z",
+        "dateOfDeath": "2025-05-28T08:17:18.576Z",
         "causeOfDeath": "Natural causes",
         "placeOfDeath": "Hospital",
         "deceasedId": null,
@@ -74483,8 +74968,8 @@
         "notes": null,
         "documents": null,
         "additionalInfo": null,
-        "createdAt": "2025-06-12T06:23:23.450Z",
-        "updatedAt": "2025-06-12T06:23:23.450Z"
+        "createdAt": "2025-06-12T08:17:18.576Z",
+        "updatedAt": "2025-06-12T08:17:18.576Z"
       }
     ],
     [
@@ -74495,7 +74980,7 @@
         "policyId": 3,
         "status": "in_review",
         "dateOfIncident": null,
-        "dateOfDeath": "2025-06-02T06:23:23.449Z",
+        "dateOfDeath": "2025-06-02T08:17:18.576Z",
         "causeOfDeath": "Accident",
         "placeOfDeath": "Residence",
         "deceasedId": null,
@@ -74516,8 +75001,8 @@
         "notes": null,
         "documents": null,
         "additionalInfo": null,
-        "createdAt": "2025-06-12T06:23:23.468Z",
-        "updatedAt": "2025-06-12T06:23:23.468Z"
+        "createdAt": "2025-06-12T08:17:18.593Z",
+        "updatedAt": "2025-06-12T08:17:18.593Z"
       }
     ],
     [
@@ -74528,7 +75013,7 @@
         "policyId": 7,
         "status": "approved",
         "dateOfIncident": null,
-        "dateOfDeath": "2025-05-13T06:23:23.449Z",
+        "dateOfDeath": "2025-05-13T08:17:18.576Z",
         "causeOfDeath": "Illness",
         "placeOfDeath": "Hospital",
         "deceasedId": null,
@@ -74544,13 +75029,13 @@
         "claimAmount": null,
         "approvedAmount": null,
         "paymentMethod": null,
-        "paymentDate": "2025-06-07T06:23:23.449Z",
+        "paymentDate": "2025-06-07T08:17:18.576Z",
         "rejectionReason": null,
         "notes": null,
         "documents": null,
         "additionalInfo": null,
-        "createdAt": "2025-06-12T06:23:23.531Z",
-        "updatedAt": "2025-06-12T06:23:23.531Z"
+        "createdAt": "2025-06-12T08:17:26.791Z",
+        "updatedAt": "2025-06-12T08:17:26.791Z"
       }
     ],
     [
@@ -74561,7 +75046,7 @@
         "policyId": 1,
         "status": "pending",
         "dateOfIncident": null,
-        "dateOfDeath": "2025-05-28T06:27:03.072Z",
+        "dateOfDeath": "2025-05-28T08:17:43.062Z",
         "causeOfDeath": "Natural causes",
         "placeOfDeath": "Hospital",
         "deceasedId": null,
@@ -74582,8 +75067,8 @@
         "notes": null,
         "documents": null,
         "additionalInfo": null,
-        "createdAt": "2025-06-12T06:27:03.073Z",
-        "updatedAt": "2025-06-12T06:27:03.073Z"
+        "createdAt": "2025-06-12T08:17:43.062Z",
+        "updatedAt": "2025-06-12T08:17:43.062Z"
       }
     ],
     [
@@ -74594,7 +75079,7 @@
         "policyId": 3,
         "status": "in_review",
         "dateOfIncident": null,
-        "dateOfDeath": "2025-06-02T06:27:03.072Z",
+        "dateOfDeath": "2025-06-02T08:17:43.062Z",
         "causeOfDeath": "Accident",
         "placeOfDeath": "Residence",
         "deceasedId": null,
@@ -74615,8 +75100,8 @@
         "notes": null,
         "documents": null,
         "additionalInfo": null,
-        "createdAt": "2025-06-12T06:27:03.121Z",
-        "updatedAt": "2025-06-12T06:27:03.121Z"
+        "createdAt": "2025-06-12T08:17:43.082Z",
+        "updatedAt": "2025-06-12T08:17:43.082Z"
       }
     ],
     [
@@ -74627,7 +75112,7 @@
         "policyId": 7,
         "status": "approved",
         "dateOfIncident": null,
-        "dateOfDeath": "2025-05-13T06:27:03.072Z",
+        "dateOfDeath": "2025-05-13T08:17:43.062Z",
         "causeOfDeath": "Illness",
         "placeOfDeath": "Hospital",
         "deceasedId": null,
@@ -74643,13 +75128,112 @@
         "claimAmount": null,
         "approvedAmount": null,
         "paymentMethod": null,
-        "paymentDate": "2025-06-07T06:27:03.072Z",
+        "paymentDate": "2025-06-07T08:17:43.062Z",
         "rejectionReason": null,
         "notes": null,
         "documents": null,
         "additionalInfo": null,
-        "createdAt": "2025-06-12T06:27:03.148Z",
-        "updatedAt": "2025-06-12T06:27:03.148Z"
+        "createdAt": "2025-06-12T08:17:43.169Z",
+        "updatedAt": "2025-06-12T08:17:43.169Z"
+      }
+    ],
+    [
+      389,
+      {
+        "id": 389,
+        "claimNumber": "CLM-001",
+        "policyId": 1,
+        "status": "pending",
+        "dateOfIncident": null,
+        "dateOfDeath": "2025-05-28T08:17:57.937Z",
+        "causeOfDeath": "Natural causes",
+        "placeOfDeath": "Hospital",
+        "deceasedId": null,
+        "claimantName": "Robert Chen",
+        "claimantContact": "555-123-4567",
+        "claimantIdNumber": "8001015800082",
+        "claimantEmail": "robert.chen@example.com",
+        "relationshipToMember": "Father",
+        "funeralHome": null,
+        "funeralDate": null,
+        "bankDetailId": null,
+        "assignedTo": null,
+        "claimAmount": null,
+        "approvedAmount": null,
+        "paymentMethod": null,
+        "paymentDate": null,
+        "rejectionReason": null,
+        "notes": null,
+        "documents": null,
+        "additionalInfo": null,
+        "createdAt": "2025-06-12T08:17:57.937Z",
+        "updatedAt": "2025-06-12T08:17:57.937Z"
+      }
+    ],
+    [
+      390,
+      {
+        "id": 390,
+        "claimNumber": "CLM-002",
+        "policyId": 3,
+        "status": "in_review",
+        "dateOfIncident": null,
+        "dateOfDeath": "2025-06-02T08:17:57.937Z",
+        "causeOfDeath": "Accident",
+        "placeOfDeath": "Residence",
+        "deceasedId": null,
+        "claimantName": "Michael Porter",
+        "claimantContact": "555-345-6789",
+        "claimantIdNumber": "7703115800084",
+        "claimantEmail": "michael.porter@example.com",
+        "relationshipToMember": "Spouse",
+        "funeralHome": null,
+        "funeralDate": null,
+        "bankDetailId": null,
+        "assignedTo": null,
+        "claimAmount": null,
+        "approvedAmount": null,
+        "paymentMethod": null,
+        "paymentDate": null,
+        "rejectionReason": null,
+        "notes": null,
+        "documents": null,
+        "additionalInfo": null,
+        "createdAt": "2025-06-12T08:17:57.955Z",
+        "updatedAt": "2025-06-12T08:17:57.955Z"
+      }
+    ],
+    [
+      391,
+      {
+        "id": 391,
+        "claimNumber": "CLM-003",
+        "policyId": 7,
+        "status": "approved",
+        "dateOfIncident": null,
+        "dateOfDeath": "2025-05-13T08:17:57.937Z",
+        "causeOfDeath": "Illness",
+        "placeOfDeath": "Hospital",
+        "deceasedId": null,
+        "claimantName": "James Taylor",
+        "claimantContact": "555-789-0123",
+        "claimantIdNumber": "8211115800081",
+        "claimantEmail": "james.taylor@example.com",
+        "relationshipToMember": "Mother",
+        "funeralHome": null,
+        "funeralDate": null,
+        "bankDetailId": null,
+        "assignedTo": null,
+        "claimAmount": null,
+        "approvedAmount": null,
+        "paymentMethod": null,
+        "paymentDate": "2025-06-07T08:17:57.937Z",
+        "rejectionReason": null,
+        "notes": null,
+        "documents": null,
+        "additionalInfo": null,
+        "createdAt": "2025-06-12T08:17:57.980Z",
+        "updatedAt": "2025-06-12T08:17:57.980Z"
       }
     ]
   ],
@@ -89382,10 +89966,10 @@
       921,
       {
         "id": 921,
-        "claimId": 383,
+        "claimId": 386,
         "documentType": "death_certificate",
         "documentUrl": "https://example.com/claims/CLM-001/death_certificate.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "pending",
         "verifiedAt": null,
@@ -89398,10 +89982,10 @@
       922,
       {
         "id": 922,
-        "claimId": 383,
+        "claimId": 386,
         "documentType": "id_document",
         "documentUrl": "https://example.com/claims/CLM-001/id_document.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "pending",
         "verifiedAt": null,
@@ -89414,13 +89998,13 @@
       923,
       {
         "id": 923,
-        "claimId": 384,
+        "claimId": 387,
         "documentType": "death_certificate",
         "documentUrl": "https://example.com/claims/CLM-002/death_certificate.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-06-04T06:23:23.449Z",
+        "verifiedAt": "2025-06-04T08:17:43.062Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "death_certificate.pdf"
@@ -89430,13 +90014,13 @@
       924,
       {
         "id": 924,
-        "claimId": 384,
+        "claimId": 387,
         "documentType": "id_document",
         "documentUrl": "https://example.com/claims/CLM-002/id_document.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-06-04T06:23:23.449Z",
+        "verifiedAt": "2025-06-04T08:17:43.062Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "id_document.pdf"
@@ -89446,10 +90030,10 @@
       925,
       {
         "id": 925,
-        "claimId": 384,
+        "claimId": 387,
         "documentType": "police_report",
         "documentUrl": "https://example.com/claims/CLM-002/police_report.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "pending",
         "verifiedAt": null,
@@ -89462,13 +90046,13 @@
       926,
       {
         "id": 926,
-        "claimId": 385,
+        "claimId": 388,
         "documentType": "death_certificate",
         "documentUrl": "https://example.com/claims/CLM-003/death_certificate.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-05-18T06:23:23.449Z",
+        "verifiedAt": "2025-05-18T08:17:43.062Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "death_certificate.pdf"
@@ -89478,13 +90062,13 @@
       927,
       {
         "id": 927,
-        "claimId": 385,
+        "claimId": 388,
         "documentType": "id_document",
         "documentUrl": "https://example.com/claims/CLM-003/id_document.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-05-18T06:23:23.449Z",
+        "verifiedAt": "2025-05-18T08:17:43.062Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "id_document.pdf"
@@ -89494,13 +90078,13 @@
       928,
       {
         "id": 928,
-        "claimId": 385,
+        "claimId": 388,
         "documentType": "bank_statement",
         "documentUrl": "https://example.com/claims/CLM-003/bank_statement.pdf",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-05-23T06:23:23.449Z",
+        "verifiedAt": "2025-05-23T08:17:43.062Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "bank_statement.pdf"
@@ -89510,10 +90094,10 @@
       929,
       {
         "id": 929,
-        "claimId": 386,
+        "claimId": 389,
         "documentType": "death_certificate",
         "documentUrl": "https://example.com/claims/CLM-001/death_certificate.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "pending",
         "verifiedAt": null,
@@ -89526,10 +90110,10 @@
       930,
       {
         "id": 930,
-        "claimId": 386,
+        "claimId": 389,
         "documentType": "id_document",
         "documentUrl": "https://example.com/claims/CLM-001/id_document.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "pending",
         "verifiedAt": null,
@@ -89542,13 +90126,13 @@
       931,
       {
         "id": 931,
-        "claimId": 387,
+        "claimId": 390,
         "documentType": "death_certificate",
         "documentUrl": "https://example.com/claims/CLM-002/death_certificate.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-06-04T06:27:03.072Z",
+        "verifiedAt": "2025-06-04T08:17:57.937Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "death_certificate.pdf"
@@ -89558,13 +90142,13 @@
       932,
       {
         "id": 932,
-        "claimId": 387,
+        "claimId": 390,
         "documentType": "id_document",
         "documentUrl": "https://example.com/claims/CLM-002/id_document.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-06-04T06:27:03.072Z",
+        "verifiedAt": "2025-06-04T08:17:57.937Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "id_document.pdf"
@@ -89574,10 +90158,10 @@
       933,
       {
         "id": 933,
-        "claimId": 387,
+        "claimId": 390,
         "documentType": "police_report",
         "documentUrl": "https://example.com/claims/CLM-002/police_report.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "pending",
         "verifiedAt": null,
@@ -89590,13 +90174,13 @@
       934,
       {
         "id": 934,
-        "claimId": 388,
+        "claimId": 391,
         "documentType": "death_certificate",
         "documentUrl": "https://example.com/claims/CLM-003/death_certificate.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-05-18T06:27:03.072Z",
+        "verifiedAt": "2025-05-18T08:17:57.937Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "death_certificate.pdf"
@@ -89606,13 +90190,13 @@
       935,
       {
         "id": 935,
-        "claimId": 388,
+        "claimId": 391,
         "documentType": "id_document",
         "documentUrl": "https://example.com/claims/CLM-003/id_document.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-05-18T06:27:03.072Z",
+        "verifiedAt": "2025-05-18T08:17:57.937Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "id_document.pdf"
@@ -89622,13 +90206,13 @@
       936,
       {
         "id": 936,
-        "claimId": 388,
+        "claimId": 391,
         "documentType": "bank_statement",
         "documentUrl": "https://example.com/claims/CLM-003/bank_statement.pdf",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "uploadedBy": 2,
         "status": "verified",
-        "verifiedAt": "2025-05-23T06:27:03.072Z",
+        "verifiedAt": "2025-05-23T08:17:57.937Z",
         "verifiedBy": 3,
         "notes": null,
         "fileName": "bank_statement.pdf"
@@ -103440,10 +104024,10 @@
       1151,
       {
         "id": 1151,
-        "claimId": 383,
+        "claimId": 386,
         "userId": 2,
         "content": "Initial claim created. Waiting for documentation to be uploaded.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103452,10 +104036,10 @@
       1152,
       {
         "id": 1152,
-        "claimId": 383,
+        "claimId": 386,
         "userId": 2,
         "content": "Death certificate and ID document uploaded.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "documents"
       }
@@ -103464,10 +104048,10 @@
       1153,
       {
         "id": 1153,
-        "claimId": 384,
+        "claimId": 387,
         "userId": 2,
         "content": "Initial claim created for accidental death.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103476,10 +104060,10 @@
       1154,
       {
         "id": 1154,
-        "claimId": 384,
+        "claimId": 387,
         "userId": 3,
         "content": "Claim assigned to me. I'll handle the processing.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103488,10 +104072,10 @@
       1155,
       {
         "id": 1155,
-        "claimId": 384,
+        "claimId": 387,
         "userId": 3,
         "content": "Death certificate and ID document verified. Waiting for police report.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "documents"
       }
@@ -103500,10 +104084,10 @@
       1156,
       {
         "id": 1156,
-        "claimId": 384,
+        "claimId": 387,
         "userId": 3,
         "content": "Need to contact the claimant for additional information about the accident.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": true,
         "category": "internal"
       }
@@ -103512,10 +104096,10 @@
       1157,
       {
         "id": 1157,
-        "claimId": 385,
+        "claimId": 388,
         "userId": 2,
         "content": "Initial claim created.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103524,10 +104108,10 @@
       1158,
       {
         "id": 1158,
-        "claimId": 385,
+        "claimId": 388,
         "userId": 3,
         "content": "Claim assigned to me. All documents verified.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103536,10 +104120,10 @@
       1159,
       {
         "id": 1159,
-        "claimId": 385,
+        "claimId": 388,
         "userId": 3,
         "content": "Claim approved for payment. Amount: R25,000",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "payment"
       }
@@ -103548,10 +104132,10 @@
       1160,
       {
         "id": 1160,
-        "claimId": 385,
+        "claimId": 388,
         "userId": 3,
         "content": "Payment processed and sent to claimant's bank account.",
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "isPrivate": false,
         "category": "payment"
       }
@@ -103560,10 +104144,10 @@
       1161,
       {
         "id": 1161,
-        "claimId": 386,
+        "claimId": 389,
         "userId": 2,
         "content": "Initial claim created. Waiting for documentation to be uploaded.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103572,10 +104156,10 @@
       1162,
       {
         "id": 1162,
-        "claimId": 386,
+        "claimId": 389,
         "userId": 2,
         "content": "Death certificate and ID document uploaded.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "documents"
       }
@@ -103584,10 +104168,10 @@
       1163,
       {
         "id": 1163,
-        "claimId": 387,
+        "claimId": 390,
         "userId": 2,
         "content": "Initial claim created for accidental death.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103596,10 +104180,10 @@
       1164,
       {
         "id": 1164,
-        "claimId": 387,
+        "claimId": 390,
         "userId": 3,
         "content": "Claim assigned to me. I'll handle the processing.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103608,10 +104192,10 @@
       1165,
       {
         "id": 1165,
-        "claimId": 387,
+        "claimId": 390,
         "userId": 3,
         "content": "Death certificate and ID document verified. Waiting for police report.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "documents"
       }
@@ -103620,10 +104204,10 @@
       1166,
       {
         "id": 1166,
-        "claimId": 387,
+        "claimId": 390,
         "userId": 3,
         "content": "Need to contact the claimant for additional information about the accident.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": true,
         "category": "internal"
       }
@@ -103632,10 +104216,10 @@
       1167,
       {
         "id": 1167,
-        "claimId": 388,
+        "claimId": 391,
         "userId": 2,
         "content": "Initial claim created.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103644,10 +104228,10 @@
       1168,
       {
         "id": 1168,
-        "claimId": 388,
+        "claimId": 391,
         "userId": 3,
         "content": "Claim assigned to me. All documents verified.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "general"
       }
@@ -103656,10 +104240,10 @@
       1169,
       {
         "id": 1169,
-        "claimId": 388,
+        "claimId": 391,
         "userId": 3,
         "content": "Claim approved for payment. Amount: R25,000",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "payment"
       }
@@ -103668,10 +104252,10 @@
       1170,
       {
         "id": 1170,
-        "claimId": 388,
+        "claimId": 391,
         "userId": 3,
         "content": "Payment processed and sent to claimant's bank account.",
-        "createdAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "isPrivate": false,
         "category": "payment"
       }
@@ -116568,7 +117152,7 @@
         "branch": "Johannesburg Central",
         "status": "active",
         "commissionRate": 10.5,
-        "hireDate": "2024-06-12T06:23:23.449Z",
+        "hireDate": "2024-06-12T08:17:43.062Z",
         "idNumber": "7810195234081",
         "address": "123 Main Road, Sandton, Johannesburg",
         "avatarUrl": "https://randomuser.me/api/portraits/men/44.jpg",
@@ -116580,8 +117164,8 @@
         "totalPolicies": 24,
         "totalCommission": 45600,
         "id": 461,
-        "createdAt": "2025-06-12T06:23:23.558Z",
-        "updatedAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
+        "updatedAt": "2025-06-12T08:17:43.197Z",
         "terminationDate": null,
         "notes": null
       }
@@ -116596,7 +117180,7 @@
         "branch": "Cape Town",
         "status": "active",
         "commissionRate": 12,
-        "hireDate": "2024-12-14T06:23:23.449Z",
+        "hireDate": "2024-12-14T08:17:43.062Z",
         "idNumber": "8903125679084",
         "address": "456 Beach Road, Camps Bay, Cape Town",
         "avatarUrl": "https://randomuser.me/api/portraits/women/65.jpg",
@@ -116607,8 +117191,8 @@
         "totalPolicies": 18,
         "totalCommission": 32400,
         "id": 462,
-        "createdAt": "2025-06-12T06:23:23.558Z",
-        "updatedAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
+        "updatedAt": "2025-06-12T08:17:43.197Z",
         "terminationDate": null,
         "taxNumber": null,
         "notes": null
@@ -116624,15 +117208,15 @@
         "branch": "Durban",
         "status": "active",
         "commissionRate": 11.25,
-        "hireDate": "2025-03-14T06:23:23.449Z",
+        "hireDate": "2025-03-14T08:17:43.062Z",
         "idNumber": "8506155341082",
         "address": "789 Umhlanga Rocks Drive, Durban North",
         "avatarUrl": "https://randomuser.me/api/portraits/men/22.jpg",
         "totalPolicies": 10,
         "totalCommission": 18000,
         "id": 463,
-        "createdAt": "2025-06-12T06:23:23.558Z",
-        "updatedAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
+        "updatedAt": "2025-06-12T08:17:43.197Z",
         "terminationDate": null,
         "bankName": null,
         "accountNumber": null,
@@ -116652,16 +117236,16 @@
         "branch": "Pretoria",
         "status": "inactive",
         "commissionRate": 10,
-        "hireDate": "2024-09-15T06:23:23.449Z",
-        "terminationDate": "2025-05-13T06:23:23.449Z",
+        "hireDate": "2024-09-15T08:17:43.062Z",
+        "terminationDate": "2025-05-13T08:17:43.062Z",
         "idNumber": "9201012468081",
         "address": "321 Church Street, Hatfield, Pretoria",
         "avatarUrl": "https://randomuser.me/api/portraits/women/33.jpg",
         "totalPolicies": 4,
         "totalCommission": 6800,
         "id": 464,
-        "createdAt": "2025-06-12T06:23:23.558Z",
-        "updatedAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
+        "updatedAt": "2025-06-12T08:17:43.197Z",
         "bankName": null,
         "accountNumber": null,
         "accountType": null,
@@ -116680,7 +117264,7 @@
         "branch": "Johannesburg Central",
         "status": "active",
         "commissionRate": 10.5,
-        "hireDate": "2024-06-12T06:27:03.072Z",
+        "hireDate": "2024-06-12T08:17:57.937Z",
         "idNumber": "7810195234081",
         "address": "123 Main Road, Sandton, Johannesburg",
         "avatarUrl": "https://randomuser.me/api/portraits/men/44.jpg",
@@ -116692,8 +117276,8 @@
         "totalPolicies": 24,
         "totalCommission": 45600,
         "id": 465,
-        "createdAt": "2025-06-12T06:27:03.174Z",
-        "updatedAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
+        "updatedAt": "2025-06-12T08:17:58.161Z",
         "terminationDate": null,
         "notes": null
       }
@@ -116708,7 +117292,7 @@
         "branch": "Cape Town",
         "status": "active",
         "commissionRate": 12,
-        "hireDate": "2024-12-14T06:27:03.072Z",
+        "hireDate": "2024-12-14T08:17:57.937Z",
         "idNumber": "8903125679084",
         "address": "456 Beach Road, Camps Bay, Cape Town",
         "avatarUrl": "https://randomuser.me/api/portraits/women/65.jpg",
@@ -116719,8 +117303,8 @@
         "totalPolicies": 18,
         "totalCommission": 32400,
         "id": 466,
-        "createdAt": "2025-06-12T06:27:03.174Z",
-        "updatedAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
+        "updatedAt": "2025-06-12T08:17:58.161Z",
         "terminationDate": null,
         "taxNumber": null,
         "notes": null
@@ -116736,15 +117320,15 @@
         "branch": "Durban",
         "status": "active",
         "commissionRate": 11.25,
-        "hireDate": "2025-03-14T06:27:03.072Z",
+        "hireDate": "2025-03-14T08:17:57.937Z",
         "idNumber": "8506155341082",
         "address": "789 Umhlanga Rocks Drive, Durban North",
         "avatarUrl": "https://randomuser.me/api/portraits/men/22.jpg",
         "totalPolicies": 10,
         "totalCommission": 18000,
         "id": 467,
-        "createdAt": "2025-06-12T06:27:03.174Z",
-        "updatedAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
+        "updatedAt": "2025-06-12T08:17:58.161Z",
         "terminationDate": null,
         "bankName": null,
         "accountNumber": null,
@@ -116764,16 +117348,16 @@
         "branch": "Pretoria",
         "status": "inactive",
         "commissionRate": 10,
-        "hireDate": "2024-09-15T06:27:03.072Z",
-        "terminationDate": "2025-05-13T06:27:03.072Z",
+        "hireDate": "2024-09-15T08:17:57.937Z",
+        "terminationDate": "2025-05-13T08:17:57.937Z",
         "idNumber": "9201012468081",
         "address": "321 Church Street, Hatfield, Pretoria",
         "avatarUrl": "https://randomuser.me/api/portraits/women/33.jpg",
         "totalPolicies": 4,
         "totalCommission": 6800,
         "id": 468,
-        "createdAt": "2025-06-12T06:27:03.174Z",
-        "updatedAt": "2025-06-12T06:27:03.174Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
+        "updatedAt": "2025-06-12T08:17:58.161Z",
         "bankName": null,
         "accountNumber": null,
         "accountType": null,
@@ -125302,11 +125886,11 @@
         "commissionAmount": 130.2,
         "commissionRate": 10.5,
         "status": "paid",
-        "paymentDate": "2025-04-23T06:23:23.449Z",
-        "policyStartDate": "2025-04-18T06:23:23.449Z",
-        "policyEndDate": "2026-04-13T06:23:23.449Z",
+        "paymentDate": "2025-04-23T08:17:43.062Z",
+        "policyStartDate": "2025-04-18T08:17:43.062Z",
+        "policyEndDate": "2026-04-13T08:17:43.062Z",
         "id": 576,
-        "createdAt": "2025-06-12T06:23:23.558Z"
+        "createdAt": "2025-06-12T08:17:43.197Z"
       }
     ],
     [
@@ -125318,7 +125902,7 @@
         "commissionRate": 12,
         "status": "pending",
         "id": 577,
-        "createdAt": "2025-06-12T06:23:23.558Z",
+        "createdAt": "2025-06-12T08:17:43.197Z",
         "paymentDate": null,
         "policyEndDate": null
       }
@@ -125331,11 +125915,11 @@
         "commissionAmount": 405,
         "commissionRate": 11.25,
         "status": "paid",
-        "paymentDate": "2025-06-02T06:23:23.449Z",
-        "policyStartDate": "2025-06-02T06:23:23.449Z",
-        "policyEndDate": "2026-05-28T06:23:23.449Z",
+        "paymentDate": "2025-06-02T08:17:43.062Z",
+        "policyStartDate": "2025-06-02T08:17:43.062Z",
+        "policyEndDate": "2026-05-28T08:17:43.062Z",
         "id": 578,
-        "createdAt": "2025-06-12T06:23:23.558Z"
+        "createdAt": "2025-06-12T08:17:43.197Z"
       }
     ],
     [
@@ -125346,11 +125930,11 @@
         "commissionAmount": 195.3,
         "commissionRate": 10.5,
         "status": "paid",
-        "paymentDate": "2024-07-22T06:23:23.449Z",
-        "policyStartDate": "2024-07-22T06:23:23.449Z",
-        "policyEndDate": "2025-06-15T06:23:23.449Z",
+        "paymentDate": "2024-07-22T08:17:43.062Z",
+        "policyStartDate": "2024-07-22T08:17:43.062Z",
+        "policyEndDate": "2025-06-15T08:17:43.062Z",
         "id": 579,
-        "createdAt": "2025-06-12T06:23:23.558Z"
+        "createdAt": "2025-06-12T08:17:43.198Z"
       }
     ],
     [
@@ -125361,11 +125945,11 @@
         "commissionAmount": 294,
         "commissionRate": 12,
         "status": "paid",
-        "paymentDate": "2024-07-17T06:23:23.449Z",
-        "policyStartDate": "2024-07-12T06:23:23.449Z",
-        "policyEndDate": "2025-06-17T06:23:23.449Z",
+        "paymentDate": "2024-07-17T08:17:43.062Z",
+        "policyStartDate": "2024-07-12T08:17:43.062Z",
+        "policyEndDate": "2025-06-17T08:17:43.062Z",
         "id": 580,
-        "createdAt": "2025-06-12T06:23:23.558Z"
+        "createdAt": "2025-06-12T08:17:43.198Z"
       }
     ],
     [
@@ -125376,11 +125960,11 @@
         "commissionAmount": 130.2,
         "commissionRate": 10.5,
         "status": "paid",
-        "paymentDate": "2025-04-23T06:27:03.072Z",
-        "policyStartDate": "2025-04-18T06:27:03.072Z",
-        "policyEndDate": "2026-04-13T06:27:03.072Z",
+        "paymentDate": "2025-04-23T08:17:57.937Z",
+        "policyStartDate": "2025-04-18T08:17:57.937Z",
+        "policyEndDate": "2026-04-13T08:17:57.937Z",
         "id": 581,
-        "createdAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.161Z"
       }
     ],
     [
@@ -125392,7 +125976,7 @@
         "commissionRate": 12,
         "status": "pending",
         "id": 582,
-        "createdAt": "2025-06-12T06:27:03.175Z",
+        "createdAt": "2025-06-12T08:17:58.161Z",
         "paymentDate": null,
         "policyEndDate": null
       }
@@ -125405,11 +125989,11 @@
         "commissionAmount": 405,
         "commissionRate": 11.25,
         "status": "paid",
-        "paymentDate": "2025-06-02T06:27:03.072Z",
-        "policyStartDate": "2025-06-02T06:27:03.072Z",
-        "policyEndDate": "2026-05-28T06:27:03.072Z",
+        "paymentDate": "2025-06-02T08:17:57.937Z",
+        "policyStartDate": "2025-06-02T08:17:57.937Z",
+        "policyEndDate": "2026-05-28T08:17:57.937Z",
         "id": 583,
-        "createdAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.161Z"
       }
     ],
     [
@@ -125420,11 +126004,11 @@
         "commissionAmount": 195.3,
         "commissionRate": 10.5,
         "status": "paid",
-        "paymentDate": "2024-07-22T06:27:03.072Z",
-        "policyStartDate": "2024-07-22T06:27:03.072Z",
-        "policyEndDate": "2025-06-15T06:27:03.072Z",
+        "paymentDate": "2024-07-22T08:17:57.937Z",
+        "policyStartDate": "2024-07-22T08:17:57.937Z",
+        "policyEndDate": "2025-06-15T08:17:57.937Z",
         "id": 584,
-        "createdAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.161Z"
       }
     ],
     [
@@ -125435,11 +126019,11 @@
         "commissionAmount": 294,
         "commissionRate": 12,
         "status": "paid",
-        "paymentDate": "2024-07-17T06:27:03.072Z",
-        "policyStartDate": "2024-07-12T06:27:03.072Z",
-        "policyEndDate": "2025-06-17T06:27:03.072Z",
+        "paymentDate": "2024-07-17T08:17:57.937Z",
+        "policyStartDate": "2024-07-12T08:17:57.937Z",
+        "policyEndDate": "2025-06-17T08:17:57.937Z",
         "id": 585,
-        "createdAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.161Z"
       }
     ]
   ],
@@ -138112,8 +138696,8 @@
           "renewalRateTarget": 85
         },
         "id": 576,
-        "createdAt": "2025-06-12T06:23:23.559Z",
-        "updatedAt": "2025-06-12T06:23:23.559Z"
+        "createdAt": "2025-06-12T08:17:43.198Z",
+        "updatedAt": "2025-06-12T08:17:43.198Z"
       }
     ],
     [
@@ -138134,8 +138718,8 @@
           "renewalRateTarget": 85
         },
         "id": 577,
-        "createdAt": "2025-06-12T06:23:23.559Z",
-        "updatedAt": "2025-06-12T06:23:23.559Z"
+        "createdAt": "2025-06-12T08:17:43.198Z",
+        "updatedAt": "2025-06-12T08:17:43.198Z"
       }
     ],
     [
@@ -138156,8 +138740,8 @@
           "renewalRateTarget": 80
         },
         "id": 578,
-        "createdAt": "2025-06-12T06:23:23.559Z",
-        "updatedAt": "2025-06-12T06:23:23.559Z"
+        "createdAt": "2025-06-12T08:17:43.198Z",
+        "updatedAt": "2025-06-12T08:17:43.198Z"
       }
     ],
     [
@@ -138178,8 +138762,8 @@
           "renewalRateTarget": 80
         },
         "id": 579,
-        "createdAt": "2025-06-12T06:23:23.559Z",
-        "updatedAt": "2025-06-12T06:23:23.559Z"
+        "createdAt": "2025-06-12T08:17:43.198Z",
+        "updatedAt": "2025-06-12T08:17:43.198Z"
       }
     ],
     [
@@ -138200,8 +138784,8 @@
           "renewalRateTarget": 70
         },
         "id": 580,
-        "createdAt": "2025-06-12T06:23:23.559Z",
-        "updatedAt": "2025-06-12T06:23:23.559Z"
+        "createdAt": "2025-06-12T08:17:43.198Z",
+        "updatedAt": "2025-06-12T08:17:43.198Z"
       }
     ],
     [
@@ -138222,8 +138806,8 @@
           "renewalRateTarget": 85
         },
         "id": 581,
-        "createdAt": "2025-06-12T06:27:03.175Z",
-        "updatedAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.161Z",
+        "updatedAt": "2025-06-12T08:17:58.161Z"
       }
     ],
     [
@@ -138244,8 +138828,8 @@
           "renewalRateTarget": 85
         },
         "id": 582,
-        "createdAt": "2025-06-12T06:27:03.175Z",
-        "updatedAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.161Z",
+        "updatedAt": "2025-06-12T08:17:58.161Z"
       }
     ],
     [
@@ -138266,8 +138850,8 @@
           "renewalRateTarget": 80
         },
         "id": 583,
-        "createdAt": "2025-06-12T06:27:03.175Z",
-        "updatedAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.162Z",
+        "updatedAt": "2025-06-12T08:17:58.162Z"
       }
     ],
     [
@@ -138288,8 +138872,8 @@
           "renewalRateTarget": 80
         },
         "id": 584,
-        "createdAt": "2025-06-12T06:27:03.175Z",
-        "updatedAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.162Z",
+        "updatedAt": "2025-06-12T08:17:58.162Z"
       }
     ],
     [
@@ -138310,8 +138894,8 @@
           "renewalRateTarget": 70
         },
         "id": 585,
-        "createdAt": "2025-06-12T06:27:03.175Z",
-        "updatedAt": "2025-06-12T06:27:03.175Z"
+        "createdAt": "2025-06-12T08:17:58.162Z",
+        "updatedAt": "2025-06-12T08:17:58.162Z"
       }
     ]
   ],
