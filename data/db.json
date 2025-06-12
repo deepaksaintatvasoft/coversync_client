@@ -1,0 +1,172 @@
+{
+  "clients": [
+    {
+      "id": 1,
+      "name": "John Smith",
+      "email": "john.smith@example.com",
+      "phone": "0821234567",
+      "address": "123 Main St, Johannesburg, Gauteng",
+      "dateOfBirth": "1980-01-15",
+      "gender": "male",
+      "idNumber": "8001155042089",
+      "occupation": "Software Developer",
+      "employerName": "Tech Solutions",
+      "createdAt": "2025-03-28T15:42:40.019Z"
+    }
+  ],
+  "policies": [
+    {
+      "id": 1,
+      "policyNumber": "POL-7226",
+      "clientId": 1,
+      "policyTypeId": 1,
+      "status": "active",
+      "premium": 450,
+      "frequency": "monthly",
+      "captureDate": "2025-03-28T15:42:40.020Z",
+      "inceptionDate": "2025-03-28T15:42:40.020Z",
+      "renewalDate": "2026-03-28T15:42:40.020Z",
+      "coverageAmount": 25000,
+      "deductible": 0,
+      "beneficiaries": [],
+      "additionalCoverage": {},
+      "notes": "Created for testing send to underwriter functionality",
+      "documents": [],
+      "createdAt": "2025-03-28T15:42:40.020Z",
+      "updatedAt": "2025-03-28T15:42:40.020Z"
+    }
+  ],
+  "claims": [
+    {
+      "id": 1,
+      "claimNumber": "CLM-6911",
+      "policyId": 1,
+      "clientId": 1,
+      "status": "in_review",
+      "claimType": "death",
+      "assignedTo": 1,
+      "dateOfIncident": "2023-12-15",
+      "dateOfClaim": "2023-12-20",
+      "dateOfDeath": "2023-12-15",
+      "causeOfDeath": "Natural causes",
+      "placeOfDeath": "Home",
+      "claimantName": "Jane Smith",
+      "claimantContact": "0821234568",
+      "claimantIdNumber": "8502156042082",
+      "claimantEmail": "jane.smith@example.com",
+      "relationshipToMember": "Spouse",
+      "funeralHome": "Peaceful Rest Funeral Home",
+      "funeralDate": "2023-12-22",
+      "claimAmount": 25000,
+      "approvedAmount": null,
+      "rejectionReason": null,
+      "paymentDate": null,
+      "paymentMethod": null,
+      "bankDetailId": null,
+      "documents": [],
+      "notes": "Test claim for underwriter email testing",
+      "additionalInfo": {},
+      "createdAt": "2025-03-28T15:42:40.020Z",
+      "updatedAt": "2025-03-28T15:42:40.020Z"
+    }
+  ],
+  "policyTypes": [
+    {
+      "id": 1,
+      "name": "Family Plan",
+      "description": "Comprehensive funeral cover for the whole family",
+      "color": "#3b82f6",
+      "coverageAmount": 25000,
+      "coverageDetails": {
+        "maxFamilyMembers": 10,
+        "waitingPeriod": 6
+      },
+      "eligibilityRules": {
+        "minAge": 18,
+        "maxAge": 65
+      }
+    }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "name": "Admin User",
+      "email": "admin@coversync.co.za",
+      "role": "super_admin",
+      "permissions": {
+        "manageUsers": true,
+        "managePolicies": true,
+        "manageClients": true,
+        "manageClaims": true,
+        "viewReports": true
+      },
+      "active": true,
+      "createdAt": "2025-03-28T15:42:40.019Z",
+      "updatedAt": "2025-03-28T15:42:40.019Z"
+    }
+  ],
+  "claimDocuments": [
+    {
+      "id": 1,
+      "claimId": 1,
+      "documentType": "death_certificate",
+      "fileName": "death-certificate.pdf",
+      "fileUrl": "/uploads/death-certificate.pdf",
+      "fileSize": 602148,
+      "mimeType": "application/pdf",
+      "uploadedBy": 1,
+      "uploadDate": "2025-03-28T15:42:40.020Z",
+      "verified": true,
+      "verifiedBy": 1,
+      "verificationDate": "2025-03-28T15:42:40.020Z",
+      "notes": "Test death certificate document"
+    },
+    {
+      "id": 3,
+      "claimId": 1,
+      "documentType": "id_document",
+      "fileName": "id-document.pdf",
+      "fileUrl": "/uploads/id-document.pdf",
+      "fileSize": 272372,
+      "mimeType": "application/pdf",
+      "uploadedBy": 1,
+      "uploadDate": "2025-03-28T15:42:40.020Z",
+      "verified": true,
+      "verifiedBy": 1,
+      "verificationDate": "2025-03-28T15:42:40.020Z",
+      "notes": "Test id document document"
+    },
+    {
+      "id": 6,
+      "claimId": 1,
+      "documentType": "claim_form",
+      "fileName": "claim-form.pdf",
+      "fileUrl": "/uploads/claim-form.pdf",
+      "fileSize": 433178,
+      "mimeType": "application/pdf",
+      "uploadedBy": 1,
+      "uploadDate": "2025-03-28T15:42:40.020Z",
+      "verified": true,
+      "verifiedBy": 1,
+      "verificationDate": "2025-03-28T15:42:40.020Z",
+      "notes": "Test claim form document"
+    },
+    {
+      "id": 10,
+      "claimId": 1,
+      "documentType": "bank_statement",
+      "fileName": "bank-statement.pdf",
+      "fileUrl": "/uploads/bank-statement.pdf",
+      "fileSize": 583238,
+      "mimeType": "application/pdf",
+      "uploadedBy": 1,
+      "uploadDate": "2025-03-28T15:42:40.020Z",
+      "verified": true,
+      "verifiedBy": 1,
+      "verificationDate": "2025-03-28T15:42:40.020Z",
+      "notes": "Test bank statement document"
+    }
+  ]
+}
