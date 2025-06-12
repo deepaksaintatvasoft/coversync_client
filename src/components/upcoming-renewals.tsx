@@ -109,11 +109,11 @@ export function UpcomingRenewals({
                   <div className="flex items-center mt-1">
                     <UserAvatar
                       src={policy.client?.avatarUrl || undefined}
-                      name={policy.client.name}
+                      name={policy.client?.name || 'Unknown Client'}
                       size="sm"
                       className="mr-2"
                     />
-                    <span className="text-sm text-gray-600">{policy.client.name}</span>
+                    <span className="text-sm text-gray-600">{policy.client?.name || 'Unknown Client'}</span>
                   </div>
                   
                   <div className="flex justify-between items-center mt-3">
