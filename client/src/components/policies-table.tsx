@@ -158,16 +158,16 @@ export function PoliciesTable({
                     <TableCell>
                       <div className="flex items-center">
                         <UserAvatar
-                          src={policy.client.avatarUrl || undefined}
-                          name={policy.client.name}
+                          src={policy.client?.avatarUrl || undefined}
+                          name={policy.client?.name || "Unknown Client"}
                           size="sm"
                           className="mr-2"
                         />
-                        <span className="text-sm text-gray-600">{policy.client.name}</span>
+                        <span className="text-sm text-gray-600">{policy.client?.name || "Unknown Client"}</span>
                       </div>
                     </TableCell>
                     <TableCell>
-                      <span className="text-sm text-gray-600">{policy.policyType.name}</span>
+                      <span className="text-sm text-gray-600">{policy.policyType?.name || "Unknown Type"}</span>
                     </TableCell>
                     <TableCell>
                       <BadgeStatus

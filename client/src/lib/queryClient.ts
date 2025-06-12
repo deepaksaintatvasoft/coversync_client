@@ -103,6 +103,46 @@ export async function apiRequest(
 export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
+      queryFn: async ({ queryKey }) => {
+        const url = queryKey[0] as string;
+        
+        // Handle different API endpoints with dataService
+        if (url === "/api/dashboard/stats") {
+          return await dataService.getDashboardStats();
+        } else if (url === "/api/clients") {
+          return await dataService.getClients();
+        } else if (url === "/api/policies") {
+          return await dataService.getPolicies();
+        } else if (url === "/api/policies/recent") {
+          return await dataService.getRecentPolicies();
+        } else if (url === "/api/policies/renewals") {
+          return await dataService.getRenewalPolicies();
+        } else if (url === "/api/claims") {
+          return await dataService.getClaims();
+        } else if (url === "/api/policy-types") {
+          return await dataService.getPolicyTypes();
+        } else if (url.startsWith("/api/policies/") && url.endsWith("/details")) {
+          const id = url.split("/")[3];
+          if (id && id !== "null") {
+            return await dataService.getPolicy(parseInt(id));
+          }
+          return null;
+        } else if (url.startsWith("/api/clients/")) {
+          const id = url.split("/")[3];
+          if (id && id !== "null") {
+            return await dataService.getClient(parseInt(id));
+          }
+          return null;
+        } else if (url.startsWith("/api/claims/")) {
+          const id = url.split("/")[3];
+          if (id && id !== "null") {
+            return await dataService.getClaim(parseInt(id));
+          }
+          return null;
+        }
+        
+        return {};
+      },
       refetchInterval: false,
       refetchOnWindowFocus: false,
       staleTime: Infinity,
