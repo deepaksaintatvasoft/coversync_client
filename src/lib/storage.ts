@@ -132,6 +132,7 @@ class LocalStorageService {
         frequency: "Monthly",
         startDate: "2024-01-01",
         endDate: "2024-12-31",
+        renewalDate: "2024-12-31",
         createdAt: new Date().toISOString()
       },
       {
@@ -144,6 +145,7 @@ class LocalStorageService {
         frequency: "Monthly",
         startDate: "2024-02-01",
         endDate: "2025-01-31",
+        renewalDate: "2025-01-31",
         createdAt: new Date().toISOString()
       }
     ];
@@ -340,7 +342,7 @@ class LocalStorageService {
     thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
     
     return this.getPolicies().filter(policy => {
-      const renewalDate = new Date(policy.renewalDate || policy.endDate || new Date());
+      const renewalDate = new Date(policy.renewalDate);
       return renewalDate <= thirtyDaysFromNow && policy.status === 'Active';
     });
   }
