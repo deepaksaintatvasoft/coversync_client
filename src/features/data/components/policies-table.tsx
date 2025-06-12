@@ -12,21 +12,21 @@ import {
   FileText,
   Printer
 } from "lucide-react";
-import { UserAvatar } from "@/components/ui/user-avatar";
-import { BadgeStatus } from "@/components/ui/badge-status";
-import { Button } from "@/components/ui/button";
+import { UserAvatar } from "@/features/data/components/ui/user-avatar";
+import { BadgeStatus } from "@/features/data/components/ui/badge-status";
+import { Button } from "@/features/data/components/ui/button";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/features/data/components/ui/dropdown-menu";
 import { type PolicyWithDetails } from "@shared/schema";
 import {
   Table,
@@ -35,9 +35,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Skeleton } from "@/components/ui/skeleton";
-import { PolicyScheduleButton } from "@/components/policy-schedule-button";
+} from "@/features/data/components/ui/table";
+import { Skeleton } from "@/features/data/components/ui/skeleton";
+import { PolicyScheduleButton } from "@/features/data/components/policy-schedule-button";
 
 
 export type PoliciesTableProps = {

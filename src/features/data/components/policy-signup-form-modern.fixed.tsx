@@ -6,8 +6,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { format } from "date-fns";
 import { insertPolicySchema, insertClientSchema, insertDependentSchema, insertBankDetailSchema } from "@shared/schema";
-import { apiRequest } from "@/lib/queryClient";
-import { validateSouthAfricanID, getDateOfBirthFromIDNumber, getGenderFromIDNumber } from "@/lib/utils";
+import { apiRequest } from "@/services/queryClient";
+import { validateSouthAfricanID, getDateOfBirthFromIDNumber, getGenderFromIDNumber } from "@/utils";
 
 import { 
   Card, 
@@ -16,21 +16,21 @@ import {
   CardFooter, 
   CardHeader, 
   CardTitle 
-} from "@/components/ui/card";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Badge } from "@/components/ui/badge";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Calendar } from "@/components/ui/calendar";
-import { Switch } from "@/components/ui/switch";
-import { Textarea } from "@/components/ui/textarea";
-import { cn } from "@/lib/utils";
+} from "@/features/data/components/ui/card";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/features/data/components/ui/form";
+import { Button } from "@/features/data/components/ui/button";
+import { Input } from "@/features/data/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/features/data/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/data/components/ui/tabs";
+import { Badge } from "@/features/data/components/ui/badge";
+import { Popover, PopoverContent, PopoverTrigger } from "@/features/data/components/ui/popover";
+import { RadioGroup, RadioGroupItem } from "@/features/data/components/ui/radio-group";
+import { Label } from "@/features/data/components/ui/label";
+import { Checkbox } from "@/features/data/components/ui/checkbox";
+import { Calendar } from "@/features/data/components/ui/calendar";
+import { Switch } from "@/features/data/components/ui/switch";
+import { Textarea } from "@/features/data/components/ui/textarea";
+import { cn } from "@/utils";
 import {
   AlertCircle,
   Calendar as CalendarIcon,

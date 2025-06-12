@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/features/data/components/sidebar";
 import { 
   Search, 
   Calendar, 
@@ -18,20 +18,20 @@ import {
   ArrowRight
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/features/data/components/ui/button";
+import { Input } from "@/features/data/components/ui/input";
 import { 
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from "@/features/data/components/ui/popover";
 import {
   Table,
   TableBody,
@@ -39,14 +39,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/features/data/components/ui/table";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -54,7 +54,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/features/data/components/ui/dialog";
 import {
   Pagination,
   PaginationContent,
@@ -62,10 +62,10 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import { Calendar as CalendarComponent } from "@/components/ui/calendar";
+} from "@/features/data/components/ui/pagination";
+import { Badge } from "@/features/data/components/ui/badge";
+import { Separator } from "@/features/data/components/ui/separator";
+import { Calendar as CalendarComponent } from "@/features/data/components/ui/calendar";
 import { format } from "date-fns";
 
 // Mock data for audit logs

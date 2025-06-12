@@ -6,14 +6,14 @@ import {
   FormControl,
   FormMessage,
   FormDescription,
-} from "@/components/ui/form";
+} from "@/features/data/components/ui/form";
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 import { UseFormReturn } from "react-hook-form";
 
 interface PayAtPaymentFormProps {

@@ -17,10 +17,10 @@ import {
   BadgeCheck,
   X
 } from "lucide-react";
-import { UserAvatar } from "@/components/ui/user-avatar";
-import { BadgeStatus } from "@/components/ui/badge-status";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { UserAvatar } from "@/features/data/components/ui/user-avatar";
+import { BadgeStatus } from "@/features/data/components/ui/badge-status";
+import { Button } from "@/features/data/components/ui/button";
+import { Badge } from "@/features/data/components/ui/badge";
 import {
   Dialog,
   DialogContent,
@@ -29,17 +29,17 @@ import {
   DialogTitle,
   DialogFooter,
   DialogClose
-} from "@/components/ui/dialog";
-import { Separator } from "@/components/ui/separator";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { queryClient } from "@/lib/queryClient";
+} from "@/features/data/components/ui/dialog";
+import { Separator } from "@/features/data/components/ui/separator";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/data/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle } from "@/features/data/components/ui/card";
+import { ScrollArea } from "@/features/data/components/ui/scroll-area";
+import { queryClient } from "@/services/queryClient";
 import { useQuery } from "@tanstack/react-query";
 import { type PolicyWithDetails } from "@shared/schema";
 import { MessageSquare } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "@/services/queryClient";
 
 type PolicyDetailsDialogProps = {
   policy?: PolicyWithDetails | null;

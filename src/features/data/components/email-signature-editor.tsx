@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Button } from '@/features/data/components/ui/button';
+import { Input } from '@/features/data/components/ui/input';
+import { Label } from '@/features/data/components/ui/label';
+import { Textarea } from '@/features/data/components/ui/textarea';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/features/data/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/features/data/components/ui/tabs';
 import { EmailSignatureTemplate, generateSignatureHtml } from './email-signature-template';
 
 interface EmailSignatureEditorProps {

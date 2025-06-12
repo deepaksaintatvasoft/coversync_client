@@ -3,10 +3,10 @@ import { ArrowLeft, Shield } from "lucide-react";
 import { Link } from "wouter";
 import { Policy } from "@shared/schema";
 // Import the fully fixed version with all fields and steps
-import { PolicySignupForm } from "@/components/policy-signup-form-fixed";
-import { Button } from "@/components/ui/button";
-import Sidebar from "@/components/sidebar";
-import TopBar from "@/components/topbar";
+import { PolicySignupForm } from "@/features/data/components/policy-signup-form-fixed";
+import { Button } from "@/features/data/components/ui/button";
+import Sidebar from "@/features/data/components/sidebar";
+import TopBar from "@/features/data/components/topbar";
 import { useToast } from "@/hooks/use-toast";
 
 export default function PolicySignup() {

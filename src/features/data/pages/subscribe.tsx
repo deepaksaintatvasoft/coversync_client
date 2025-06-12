@@ -2,13 +2,13 @@
 import { useStripe, Elements, PaymentElement, useElements } from '@stripe/react-stripe-js';
 import { loadStripe } from '@stripe/stripe-js';
 import { useEffect, useState } from 'react';
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "@/services/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import Sidebar from "@/components/sidebar";
-import TopBar from "@/components/topbar";
+import Sidebar from "@/features/data/components/sidebar";
+import TopBar from "@/features/data/components/topbar";
 import { Shield } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/features/data/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/features/data/components/ui/card";
 
 // Make sure to call `loadStripe` outside of a component's render to avoid
 // recreating the `Stripe` object on every render.

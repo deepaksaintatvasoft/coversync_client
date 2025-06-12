@@ -1,7 +1,7 @@
 // Let's create a custom badge component that doesn't rely on form context
 import * as React from "react";
 import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+import { cn } from "@/services/utils";
 
 // Define the Badge variants using CVA
 const badgeVariants = cva(

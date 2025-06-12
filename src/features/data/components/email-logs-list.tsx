@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/features/data/components/ui/card';
 import { useQuery } from '@tanstack/react-query';
 import { Loader2, CheckCircle, XCircle, Calendar, Search, Filter } from 'lucide-react';
 import { format } from 'date-fns';
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Calendar as CalendarComponent } from '@/components/ui/calendar';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/features/data/components/ui/table';
+import { Badge } from '@/features/data/components/ui/badge';
+import { Popover, PopoverContent, PopoverTrigger } from '@/features/data/components/ui/popover';
+import { Button } from '@/features/data/components/ui/button';
+import { Input } from '@/features/data/components/ui/input';
+import { Calendar as CalendarComponent } from '@/features/data/components/ui/calendar';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/features/data/components/ui/select';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/features/data/components/ui/dialog';
 
 const EmailLogsList = () => {
   const [page, setPage] = useState(1);

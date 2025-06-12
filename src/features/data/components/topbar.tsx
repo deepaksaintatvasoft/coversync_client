@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Menu, Search, Bell, Settings, HelpCircle } from "lucide-react";
-import { UserAvatar } from "@/components/ui/user-avatar";
-import { Input } from "@/components/ui/input";
+import { UserAvatar } from "@/features/data/components/ui/user-avatar";
+import { Input } from "@/features/data/components/ui/input";
 
 type TopBarProps = {
   user: {

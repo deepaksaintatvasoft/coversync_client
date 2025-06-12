@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { ArrowLeft, Shield } from "lucide-react";
 import { Link } from "wouter";
-import { PolicySignupForm } from "@/components/policy-signup-form-simple";
-import { Button } from "@/components/ui/button";
-import Sidebar from "@/components/sidebar";
-import TopBar from "@/components/topbar";
+import { PolicySignupForm } from "@/features/data/components/policy-signup-form-simple";
+import { Button } from "@/features/data/components/ui/button";
+import Sidebar from "@/features/data/components/sidebar";
+import TopBar from "@/features/data/components/topbar";
 import { useToast } from "@/hooks/use-toast";
 
 export default function PolicySignupPage() {

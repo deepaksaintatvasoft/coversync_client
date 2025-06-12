@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import Sidebar from "@/components/sidebar";
+import Sidebar from "@/features/data/components/sidebar";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   Table,
   TableBody,
@@ -15,9 +15,9 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "@/features/data/components/ui/table";
+import { Button } from "@/features/data/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/data/components/ui/tabs";
 import { Download, Filter } from "lucide-react";
 import {
   Select,
@@ -25,7 +25,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 import {
   BarChart,
   Bar,

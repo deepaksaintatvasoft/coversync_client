@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Link } from "wouter";
-import { queryClient } from "@/lib/queryClient";
+import { queryClient } from "@/services/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Search, Filter, FileSignature } from "lucide-react";
-import { Sidebar } from "@/components/sidebar";
-import { TopBar } from "@/components/topbar";
-import { PoliciesTable } from "@/components/policies-table";
-import { Button } from "@/components/ui/button";
-import { PolicyForm } from "@/components/policy-form";
-import { PolicyDetailsDialog } from "@/components/policy-details-dialog";
-import { apiRequest } from "@/lib/queryClient";
+import { Sidebar } from "@/features/data/components/sidebar";
+import { TopBar } from "@/features/data/components/topbar";
+import { PoliciesTable } from "@/features/data/components/policies-table";
+import { Button } from "@/features/data/components/ui/button";
+import { PolicyForm } from "@/features/data/components/policy-form";
+import { PolicyDetailsDialog } from "@/features/data/components/policy-details-dialog";
+import { apiRequest } from "@/services/queryClient";
 import { type PolicyWithDetails } from "@shared/schema";
 import {
   AlertDialog,
@@ -21,15 +21,15 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "@/features/data/components/ui/alert-dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
+} from "@/features/data/components/ui/select";
+import { Input } from "@/features/data/components/ui/input";
 
 export default function Policies() {
   const { toast } = useToast();

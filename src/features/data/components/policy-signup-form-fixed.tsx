@@ -5,35 +5,35 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "@/services/queryClient";
 import { 
   validateSouthAfricanID, 
   extractDateOfBirthFromID, 
   extractGenderFromID,
   validateSouthAfricanPhoneNumber 
-} from "@/lib/utils";
+} from "@/utils";
 
 // UI components
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Calendar } from "@/components/ui/calendar";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { Label } from "@/components/ui/label";
-import { Separator } from "@/components/ui/separator";
-import { Progress } from "@/components/ui/progress";
-import { cn } from "@/lib/utils";
+import { Button } from "@/features/data/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/features/data/components/ui/card";
+import { Checkbox } from "@/features/data/components/ui/checkbox";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/features/data/components/ui/form";
+import { Input } from "@/features/data/components/ui/input";
+import { RadioGroup, RadioGroupItem } from "@/features/data/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/features/data/components/ui/select";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/data/components/ui/tabs";
+import { Textarea } from "@/features/data/components/ui/textarea";
+import { Badge } from "@/features/data/components/ui/badge";
+import { Calendar } from "@/features/data/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/features/data/components/ui/popover";
+import { Label } from "@/features/data/components/ui/label";
+import { Separator } from "@/features/data/components/ui/separator";
+import { Progress } from "@/features/data/components/ui/progress";
+import { cn } from "@/utils";
 import { useToast } from "@/hooks/use-toast";
 
 // Payment Method Components
-import { PaymentMethodForm } from "@/components/payment-methods/PaymentMethodForm";
+import { PaymentMethodForm } from "@/features/data/components/payment-methods/PaymentMethodForm";
 
 // Icons
 import { AlertCircle, Baby, CalendarIcon, Check, CheckCircle2, ChevronLeft, ChevronRight, Heart, HelpCircle, Info, Landmark, Loader2, Mail, Phone, Plus, Shield, User, Users, X, XCircle } from "lucide-react";

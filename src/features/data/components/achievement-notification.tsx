@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { Achievement } from "./achievement-icons";
 import { useEffect, useState } from "react";
 import { Card } from "./ui/card";

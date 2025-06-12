@@ -5,15 +5,15 @@ import {
   TabsContent, 
   TabsList, 
   TabsTrigger 
-} from "@/components/ui/tabs";
+} from "@/features/data/components/ui/tabs";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+} from "@/features/data/components/ui/card";
+import { Button } from "@/features/data/components/ui/button";
 import { 
   Table, 
   TableBody, 
@@ -21,8 +21,8 @@ import {
   TableHead, 
   TableHeader, 
   TableRow 
-} from "@/components/ui/table";
-import { Badge } from "@/components/ui/badge";
+} from "@/features/data/components/ui/table";
+import { Badge } from "@/features/data/components/ui/badge";
 import { 
   AlertCircle, 
   Download, 
@@ -32,13 +32,13 @@ import {
   ArrowDown, 
   ArrowUp 
 } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Sidebar } from "@/components/sidebar";
-import { TopBar } from "@/components/topbar";
+import { Skeleton } from "@/features/data/components/ui/skeleton";
+import { Sidebar } from "@/features/data/components/sidebar";
+import { TopBar } from "@/features/data/components/topbar";
 import { useToast } from "@/hooks/use-toast";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { formatCurrency, formatDate } from "@/lib/utils";
-import StatusBadge from "@/components/status-badge";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/features/data/components/ui/dialog";
+import { formatCurrency, formatDate } from "@/services/utils";
+import StatusBadge from "@/features/data/components/status-badge";
 
 interface Policy {
   id: number;

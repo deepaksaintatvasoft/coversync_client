@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
-import { apiRequest } from "@/lib/queryClient";
+import { apiRequest } from "@/services/queryClient";
 import { useToast } from "@/hooks/use-toast";
-import Sidebar from "@/components/sidebar";
-import TopBar from "@/components/topbar";
+import Sidebar from "@/features/data/components/sidebar";
+import TopBar from "@/features/data/components/topbar";
 import { format } from "date-fns";
 import { 
   ArrowLeft, 
@@ -16,10 +16,10 @@ import {
   CheckCircle2,
   XCircle
 } from "lucide-react";
-import { validateSouthAfricanID, getDateOfBirthFromIDNumber, getGenderFromIDNumber } from "@/lib/utils";
+import { validateSouthAfricanID, getDateOfBirthFromIDNumber, getGenderFromIDNumber } from "@/services/utils";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/features/data/components/ui/button";
+import { Input } from "@/features/data/components/ui/input";
 import { 
   Card, 
   CardContent, 
@@ -27,7 +27,7 @@ import {
   CardHeader, 
   CardTitle,
   CardDescription 
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import { 
   Form, 
   FormControl, 
@@ -36,14 +36,14 @@ import {
   FormItem, 
   FormLabel, 
   FormMessage 
-} from "@/components/ui/form";
+} from "@/features/data/components/ui/form";
 import { 
   Select, 
   SelectContent, 
   SelectItem, 
   SelectTrigger, 
   SelectValue 
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 import {
   Table,
   TableBody,
@@ -51,10 +51,10 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Textarea } from "@/components/ui/textarea";
-import { Badge } from "@/components/ui/badge";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "@/features/data/components/ui/table";
+import { Textarea } from "@/features/data/components/ui/textarea";
+import { Badge } from "@/features/data/components/ui/badge";
+import { Checkbox } from "@/features/data/components/ui/checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
@@ -62,8 +62,8 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Calendar } from "@/components/ui/calendar";
+} from "@/features/data/components/ui/popover";
+import { Calendar } from "@/features/data/components/ui/calendar";
 
 // Define type interface for policies to use in selection
 interface Policy {

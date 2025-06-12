@@ -1,14 +1,14 @@
-import { Button } from "@/components/ui/button";
+import { Button } from "@/features/data/components/ui/button";
 import { 
   Card,
   CardContent,
   CardHeader,
   CardTitle
-} from "@/components/ui/card";
-import { UserAvatar } from "@/components/ui/user-avatar";
+} from "@/features/data/components/ui/card";
+import { UserAvatar } from "@/features/data/components/ui/user-avatar";
 import { formatDistanceToNow } from "date-fns";
 import { type PolicyWithDetails } from "@shared/schema";
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/features/data/components/ui/skeleton";
 
 type UpcomingRenewalsProps = {
   renewals?: PolicyWithDetails[];

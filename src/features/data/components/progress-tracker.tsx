@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/utils";
 import { CheckCircle2, Circle } from "lucide-react";
 import { useEffect, useState } from "react";
 

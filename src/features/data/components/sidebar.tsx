@@ -19,8 +19,8 @@ import {
   Filter,
   Code
 } from "lucide-react";
-import { UserAvatar } from "@/components/ui/user-avatar";
-import { cn } from "@/lib/utils";
+import { UserAvatar } from "@/features/data/components/ui/user-avatar";
+import { cn } from "@/utils";
 import LogoImage from "@assets/image_1743085029401.png";
 
 type SidebarProps = {

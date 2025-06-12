@@ -3,8 +3,8 @@ import { useQuery } from "@tanstack/react-query";
 import { 
   Card, 
   CardContent 
-} from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
+} from "@/features/data/components/ui/card";
+import { Progress } from "@/features/data/components/ui/progress";
 import {
   LineChart,
   Line,
@@ -22,7 +22,7 @@ import {
   TabsContent, 
   TabsList, 
   TabsTrigger 
-} from "@/components/ui/tabs";
+} from "@/features/data/components/ui/tabs";
 import { useLocation } from "wouter";
 import { 
   Calendar, 

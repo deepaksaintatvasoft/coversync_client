@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/features/data/components/ui/card';
+import { Button } from '@/features/data/components/ui/button';
+import { Input } from '@/features/data/components/ui/input';
+import { Label } from '@/features/data/components/ui/label';
+import { Textarea } from '@/features/data/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
+import { apiRequest } from '@/services/queryClient';
 import { Loader2, CheckCircle, XCircle, AtSign, Send } from 'lucide-react';
-import { Switch } from '@/components/ui/switch';
-import DashboardLayout from '@/components/dashboard-layout';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs';
-import EmailTemplateEditor from '@/components/email-template-editor';
-import EmailLogsList from '@/components/email-logs-list';
-import EmailSignatureEditor from '@/components/email-signature-editor';
+import { Switch } from '@/features/data/components/ui/switch';
+import DashboardLayout from '@/features/data/components/dashboard-layout';
+import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/features/data/components/ui/tabs';
+import EmailTemplateEditor from '@/features/data/components/email-template-editor';
+import EmailLogsList from '@/features/data/components/email-logs-list';
+import EmailSignatureEditor from '@/features/data/components/email-signature-editor';
 
 const EmailSettings = () => {
   const { toast } = useToast();

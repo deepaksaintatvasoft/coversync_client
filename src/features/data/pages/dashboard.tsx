@@ -1,23 +1,23 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient } from "@/lib/queryClient";
+import { queryClient } from "@/services/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { 
   FileText, User, Timer, DollarSign, Plus, CalendarDays, 
   ClipboardCheck, UserPlus, Search, BellRing, BarChart,
   Upload, Download
 } from "lucide-react";
-import { Sidebar } from "@/components/sidebar";
-import { TopBar } from "@/components/topbar";
-import { StatCard } from "@/components/stat-card";
-import { TrendChart } from "@/components/trend-chart";
-import { PolicyDistribution } from "@/components/policy-distribution";
-import { PoliciesTable } from "@/components/policies-table";
-import { UpcomingRenewals } from "@/components/upcoming-renewals";
-import { Button } from "@/components/ui/button";
-import { PolicyForm } from "@/components/policy-form";
-import { PolicyDetailsDialog } from "@/components/policy-details-dialog";
-import { apiRequest } from "@/lib/queryClient";
+import { Sidebar } from "@/features/data/components/sidebar";
+import { TopBar } from "@/features/data/components/topbar";
+import { StatCard } from "@/features/data/components/stat-card";
+import { TrendChart } from "@/features/data/components/trend-chart";
+import { PolicyDistribution } from "@/features/data/components/policy-distribution";
+import { PoliciesTable } from "@/features/data/components/policies-table";
+import { UpcomingRenewals } from "@/features/data/components/upcoming-renewals";
+import { Button } from "@/features/data/components/ui/button";
+import { PolicyForm } from "@/features/data/components/policy-form";
+import { PolicyDetailsDialog } from "@/features/data/components/policy-details-dialog";
+import { apiRequest } from "@/services/queryClient";
 import { type PolicyWithDetails } from "@shared/schema";
 import {
   AlertDialog,
@@ -28,14 +28,14 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "@/features/data/components/ui/alert-dialog";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 
 export default function Dashboard() {
   const { toast } = useToast();

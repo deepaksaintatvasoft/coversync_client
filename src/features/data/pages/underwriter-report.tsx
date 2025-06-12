@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
+import { Button } from "@/features/data/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/features/data/components/ui/card";
+import { Separator } from "@/features/data/components/ui/separator";
 import { CustomBadge } from "../components/custom-badge";
 import { useToast } from "@/hooks/use-toast";
 import { useParams, useLocation } from "wouter";
 import { useState } from "react";
-import { NavigationMenu } from "@/components/navigation-menu";
+import { NavigationMenu } from "@/features/data/components/navigation-menu";
 
 export default function UnderwriterReport() {
   const { toast } = useToast();

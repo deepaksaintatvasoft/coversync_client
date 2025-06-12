@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useLocation } from "wouter";
 import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import Sidebar from "@/components/sidebar";
-import TopBar from "@/components/topbar";
+import { apiRequest } from "@/services/queryClient";
+import Sidebar from "@/features/data/components/sidebar";
+import TopBar from "@/features/data/components/topbar";
 import { 
   Search, 
   Plus, 
@@ -15,15 +15,15 @@ import {
   User
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/features/data/components/ui/button";
+import { Input } from "@/features/data/components/ui/input";
 import { 
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 import {
   Table,
   TableBody,
@@ -31,18 +31,18 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/features/data/components/ui/table";
 import {
   Card,
   CardContent,
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/features/data/components/ui/dropdown-menu";
 import {
   Pagination,
   PaginationContent,
@@ -50,8 +50,8 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/ui/pagination";
-import { Badge } from "@/components/ui/badge";
+} from "@/features/data/components/ui/pagination";
+import { Badge } from "@/features/data/components/ui/badge";
 
 // Type definitions
 type Claim = {

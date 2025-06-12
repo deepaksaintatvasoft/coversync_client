@@ -6,8 +6,8 @@ import {
   FormControl,
   FormMessage,
   FormDescription,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/features/data/components/ui/form";
+import { Input } from "@/features/data/components/ui/input";
 import { UseFormReturn } from "react-hook-form";
 
 interface SassaPaymentFormProps {

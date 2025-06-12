@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/features/data/components/sidebar";
 import { 
   Search, 
   Plus, 
@@ -15,15 +15,15 @@ import {
   X
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/features/data/components/ui/button";
+import { Input } from "@/features/data/components/ui/input";
 import { 
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 import {
   Table,
   TableBody,
@@ -31,14 +31,14 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/features/data/components/ui/table";
 import {
   Card,
   CardContent,
   CardDescription,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -46,7 +46,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/features/data/components/ui/dropdown-menu";
 import {
   Dialog,
   DialogContent,
@@ -55,7 +55,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from "@/features/data/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -64,10 +64,10 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Badge } from "@/components/ui/badge";
-import { Switch } from "@/components/ui/switch";
-import { Checkbox } from "@/components/ui/checkbox";
+} from "@/features/data/components/ui/form";
+import { Badge } from "@/features/data/components/ui/badge";
+import { Switch } from "@/features/data/components/ui/switch";
+import { Checkbox } from "@/features/data/components/ui/checkbox";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

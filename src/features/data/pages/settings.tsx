@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Sidebar } from "@/components/sidebar";
+import { Sidebar } from "@/features/data/components/sidebar";
 import { 
   Settings as SettingsIcon, 
   Bell, 
@@ -18,11 +18,11 @@ import {
   Clock
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Switch } from "@/components/ui/switch";
-import { Separator } from "@/components/ui/separator";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/features/data/components/ui/button";
+import { Input } from "@/features/data/components/ui/input";
+import { Switch } from "@/features/data/components/ui/switch";
+import { Separator } from "@/features/data/components/ui/separator";
+import { RadioGroup, RadioGroupItem } from "@/features/data/components/ui/radio-group";
 import {
   Card,
   CardContent,
@@ -30,13 +30,13 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger,
-} from "@/components/ui/tabs";
+} from "@/features/data/components/ui/tabs";
 import {
   Form,
   FormControl,
@@ -45,14 +45,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
+} from "@/features/data/components/ui/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
+} from "@/features/data/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";

@@ -3,18 +3,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { apiRequest } from "@/lib/queryClient";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
+import { apiRequest } from "@/services/queryClient";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/data/components/ui/tabs";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/features/data/components/ui/card";
+import { Input } from "@/features/data/components/ui/input";
+import { Button } from "@/features/data/components/ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/features/data/components/ui/form";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/features/data/components/ui/select";
+import { Textarea } from "@/features/data/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
+import { Label } from "@/features/data/components/ui/label";
+import { Switch } from "@/features/data/components/ui/switch";
+import { Badge } from "@/features/data/components/ui/badge";
 import { 
   MessageSquare, 
   CreditCard, 
@@ -40,7 +40,7 @@ import {
   TableHead, 
   TableHeader, 
   TableRow 
-} from "@/components/ui/table";
+} from "@/features/data/components/ui/table";
 import { 
   Dialog, 
   DialogContent, 
@@ -50,13 +50,13 @@ import {
   DialogTitle, 
   DialogTrigger, 
   DialogClose
-} from "@/components/ui/dialog";
+} from "@/features/data/components/ui/dialog";
 import { 
   Popover, 
   PopoverContent, 
   PopoverTrigger 
-} from "@/components/ui/popover";
-import DashboardLayout from "@/components/dashboard-layout";
+} from "@/features/data/components/ui/popover";
+import DashboardLayout from "@/features/data/components/dashboard-layout";
 
 // Schema for SMS Template
 const smsTemplateSchema = z.object({

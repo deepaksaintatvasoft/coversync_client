@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
-import { queryClient } from "@/lib/queryClient";
+import { queryClient } from "@/services/queryClient";
 import { useToast } from "@/hooks/use-toast";
 import { Plus, Search, Mail, Phone, MapPin, Edit, Trash2, MoreHorizontal } from "lucide-react";
-import { Sidebar } from "@/components/sidebar";
-import { TopBar } from "@/components/topbar";
-import { Button } from "@/components/ui/button";
-import { apiRequest } from "@/lib/queryClient";
-import { UserAvatar } from "@/components/ui/user-avatar";
+import { Sidebar } from "@/features/data/components/sidebar";
+import { TopBar } from "@/features/data/components/topbar";
+import { Button } from "@/features/data/components/ui/button";
+import { apiRequest } from "@/services/queryClient";
+import { UserAvatar } from "@/features/data/components/ui/user-avatar";
 import { type Client, type InsertClient } from "@shared/schema";
 import {
   AlertDialog,
@@ -18,7 +18,7 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+} from "@/features/data/components/ui/alert-dialog";
 import {
   Card,
   CardContent,
@@ -26,7 +26,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   Dialog,
   DialogContent,
@@ -34,14 +34,14 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
+} from "@/features/data/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/features/data/components/ui/dropdown-menu";
 import {
   Form,
   FormControl,
@@ -49,14 +49,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/features/data/components/ui/form";
+import { Input } from "@/features/data/components/ui/input";
+import { Textarea } from "@/features/data/components/ui/textarea";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { Skeleton } from "@/components/ui/skeleton";
-import { validateSouthAfricanID, getDateOfBirthFromIDNumber, getGenderFromIDNumber } from "@/lib/utils";
+import { Skeleton } from "@/features/data/components/ui/skeleton";
+import { validateSouthAfricanID, getDateOfBirthFromIDNumber, getGenderFromIDNumber } from "@/services/utils";
 
 // Create a form schema with validation rules
 const clientFormSchema = z.object({

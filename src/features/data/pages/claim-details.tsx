@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { useParams, useLocation } from "wouter";
-import { Badge } from "@/components/ui/badge";
-import { NavigationMenu } from "@/components/navigation-menu";
+import { Badge } from "@/features/data/components/ui/badge";
+import { NavigationMenu } from "@/features/data/components/navigation-menu";
 import { 
   ArrowLeft, 
   ChevronRight, 
@@ -33,15 +33,15 @@ import {
   BarChart
 } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/features/data/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/data/components/ui/tabs";
 import { 
   Card, 
   CardContent, 
   CardDescription, 
   CardHeader, 
   CardTitle 
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -49,7 +49,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/features/data/components/ui/dropdown-menu";
 import {
   Table,
   TableBody,
@@ -57,8 +57,8 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
-import { Separator } from "@/components/ui/separator";
+} from "@/features/data/components/ui/table";
+import { Separator } from "@/features/data/components/ui/separator";
 import { useToast } from "@/hooks/use-toast";
 
 // Mock claim data - in a real application, you would fetch this from the API

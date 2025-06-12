@@ -15,18 +15,18 @@ import {
   DollarSign
 } from "lucide-react";
 
-import TopBar from "@/components/topbar";
-import Sidebar from "@/components/sidebar";
-import { Button } from "@/components/ui/button";
-import AgentPerformance from "@/components/agent-performance";
-import { Input } from "@/components/ui/input";
+import TopBar from "@/features/data/components/topbar";
+import Sidebar from "@/features/data/components/sidebar";
+import { Button } from "@/features/data/components/ui/button";
+import AgentPerformance from "@/features/data/components/agent-performance";
+import { Input } from "@/features/data/components/ui/input";
 import { 
   Card, 
   CardContent, 
   CardDescription, 
   CardHeader, 
   CardTitle 
-} from "@/components/ui/card";
+} from "@/features/data/components/ui/card";
 import {
   Table,
   TableBody,
@@ -34,16 +34,16 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table";
+} from "@/features/data/components/ui/table";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { Badge } from "@/components/ui/badge";
-import { Skeleton } from "@/components/ui/skeleton";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "@/features/data/components/ui/dropdown-menu";
+import { Badge } from "@/features/data/components/ui/badge";
+import { Skeleton } from "@/features/data/components/ui/skeleton";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/features/data/components/ui/tabs";
 import { format } from "date-fns";
 
 type Agent = {

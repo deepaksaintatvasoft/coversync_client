@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/features/data/components/ui/card";
 import { MoreHorizontal } from "lucide-react";
 import {
   PieChart,
@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/features/data/components/ui/button";
 
 type PolicyDistributionProps = {
   title?: string;

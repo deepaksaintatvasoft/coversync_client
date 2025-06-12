@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { apiRequest } from '@/lib/queryClient';
+import { apiRequest } from '@/services/queryClient';
 import { useToast } from '@/hooks/use-toast';
 import {
   Card,
@@ -8,16 +8,16 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+} from '@/features/data/components/ui/card';
+import { Button } from '@/features/data/components/ui/button';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/components/ui/select';
-import { Input } from '@/components/ui/input';
+} from '@/features/data/components/ui/select';
+import { Input } from '@/features/data/components/ui/input';
 import { Loader2, Mail } from 'lucide-react';
 
 export default function TestUnderwriterEmail() {
