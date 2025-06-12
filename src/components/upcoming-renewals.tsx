@@ -99,7 +99,7 @@ export function UpcomingRenewals({
                   <div className="flex justify-between items-start">
                     <div>
                       <span className="text-sm font-medium text-primary-900">{policy.policyNumber}</span>
-                      <div className="text-xs text-gray-500 mb-2">{policy.policyType.name}</div>
+                      <div className="text-xs text-gray-500 mb-2">{policy.policyType?.name || undefined}</div>
                     </div>
                     <span className={`text-xs font-medium px-2 py-1 rounded-full bg-${statusVariant} bg-opacity-10 text-${statusVariant}`}>
                       {daysLeft} left
@@ -108,7 +108,7 @@ export function UpcomingRenewals({
                   
                   <div className="flex items-center mt-1">
                     <UserAvatar
-                      src={policy.client.avatarUrl}
+                      src={policy.client?.avatarUrl || undefined}
                       name={policy.client.name}
                       size="sm"
                       className="mr-2"

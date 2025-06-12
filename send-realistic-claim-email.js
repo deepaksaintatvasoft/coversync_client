@@ -147,7 +147,7 @@ async function sendUnderwriterEmail(recipientEmail) {
     
     // Find documents for this claim
     const documents = [];
-    const uploadsDir = './client/public/uploads';
+    const uploadsDir = './public/uploads';
     
     if (fs.existsSync(uploadsDir)) {
       const files = fs.readdirSync(uploadsDir);

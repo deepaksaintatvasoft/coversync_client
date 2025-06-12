@@ -379,7 +379,7 @@ if (!existingClaim) {
 }
 
 // Ensure uploads folder exists
-const uploadsDir = './client/public/uploads';
+const uploadsDir = './public/uploads';
 ensureFolderExists(uploadsDir);
 
 // Document source and target mappings (from attached assets to uploads folder)

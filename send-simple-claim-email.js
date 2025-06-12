@@ -23,7 +23,7 @@ function getArgs() {
 
 // Scan uploads directory for document files
 function getUploadedDocuments() {
-  const uploadsDir = './client/public/uploads';
+  const uploadsDir = './public/uploads';
   const documents = [];
   
   try {

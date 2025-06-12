@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 // Read the original file
-const filePath = path.join(process.cwd(), 'client/src/components/policy-signup-form-modern.tsx');
+const filePath = path.join(process.cwd(), 'src/components/policy-signup-form-modern.tsx');
 let content = fs.readFileSync(filePath, 'utf8');
 
 // Find the positions of the problematic sections
