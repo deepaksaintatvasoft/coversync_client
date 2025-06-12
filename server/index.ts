@@ -1,23 +1,27 @@
-// Frontend-only application - this file runs Vite dev server
 import { spawn } from 'child_process';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-console.log('Starting CoverSync Frontend Application...');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-const viteProcess = spawn('npx', ['vite', '--host', '0.0.0.0', '--port', '5000'], {
+console.log('🚀 Starting CoverSync Frontend Application on http://localhost:5000 ...');
+
+const clientRoot = resolve(__dirname, '../'); // root where vite.config.ts exists
+
+const viteProcess = spawn('npx vite --host localhost --port 5000', {
   stdio: 'inherit',
-  cwd: process.cwd().replace('/server', '')
+  cwd: clientRoot,
+  shell: true,
 });
 
 viteProcess.on('close', (code) => {
-  console.log(`Vite process exited with code ${code}`);
+  console.log(`🛑 Vite process exited with code ${code}`);
 });
 
-process.on('SIGINT', () => {
-  viteProcess.kill();
-  process.exit();
-});
-
-process.on('SIGTERM', () => {
-  viteProcess.kill();
-  process.exit();
+['SIGINT', 'SIGTERM'].forEach(signal => {
+  process.on(signal, () => {
+    viteProcess.kill();
+    process.exit();
+  });
 });
