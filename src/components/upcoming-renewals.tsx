@@ -88,7 +88,7 @@ export function UpcomingRenewals({
               ))
           ) : renewals.length > 0 ? (
             renewals.map((policy) => {
-              const daysLeft = getDaysLeft(policy.renewalDate || policy.endDate || undefined);
+              const daysLeft = getDaysLeft(policy.renewalDate || new Date());
               const statusVariant = getStatusVariant(daysLeft);
               
               return (

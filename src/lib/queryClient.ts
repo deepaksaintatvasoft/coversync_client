@@ -38,10 +38,30 @@ function handleGetRequest(path: string): any {
     return { json: () => storageService.getPolicies() };
   }
   if (path === '/policies/recent') {
-    return { json: () => storageService.getRecentPolicies() };
+    const policies = storageService.getRecentPolicies();
+    const policiesWithDetails = policies.map(policy => {
+      const client = storageService.getClient(policy.clientId);
+      const policyType = storageService.getPolicyTypes().find(pt => pt.id === policy.policyTypeId);
+      return {
+        ...policy,
+        client,
+        policyType
+      };
+    });
+    return { json: () => policiesWithDetails };
   }
   if (path === '/policies/renewals') {
-    return { json: () => storageService.getUpcomingRenewals() };
+    const renewals = storageService.getUpcomingRenewals();
+    const renewalsWithDetails = renewals.map(policy => {
+      const client = storageService.getClient(policy.clientId);
+      const policyType = storageService.getPolicyTypes().find(pt => pt.id === policy.policyTypeId);
+      return {
+        ...policy,
+        client,
+        policyType
+      };
+    });
+    return { json: () => renewalsWithDetails };
   }
   if (path === '/policy-types') {
     return { json: () => storageService.getPolicyTypes() };

@@ -21,6 +21,7 @@ export interface Policy {
   frequency: string;
   startDate: string;
   endDate: string;
+  renewalDate: string;
   createdAt: string;
 }
 
@@ -339,8 +340,8 @@ class LocalStorageService {
     thirtyDaysFromNow.setDate(thirtyDaysFromNow.getDate() + 30);
     
     return this.getPolicies().filter(policy => {
-      const endDate = new Date(policy.endDate);
-      return endDate <= thirtyDaysFromNow && policy.status === 'Active';
+      const renewalDate = new Date(policy.renewalDate || policy.endDate || new Date());
+      return renewalDate <= thirtyDaysFromNow && policy.status === 'Active';
     });
   }
 }
