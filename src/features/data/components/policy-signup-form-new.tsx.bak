@@ -1,0 +1,2466 @@
+import { useState } from "react";
+import { useLocation } from "wouter";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { format } from "date-fns";
+import { insertPolicySchema, insertClientSchema, insertDependentSchema, insertBankDetailSchema } from "@shared/schema";
+import { apiRequest } from "@/lib/queryClient";
+import { 
+  CalendarIcon, ChevronRight, ChevronLeft, CheckCircle2, Check, Plus, X, 
+  User, Users, CreditCard, Mail, Phone, MapPin, FileText, Heart, Gift, 
+  Landmark, Baby, FileCheck, Loader2, Star 
+} from "lucide-react";
+
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import { Separator } from "@/components/ui/separator";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+import { useToast } from "@/hooks/use-toast";
+import { Textarea } from "@/components/ui/textarea";
+import { Badge } from "@/components/ui/badge";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+
+// Modified policy form schema without policy number and with status hardcoded to "pending"
+const policyFormSchema = insertPolicySchema.extend({
+  premium: z.number().min(1, "Premium must be at least 1"),
+  clientId: z.number().optional(), // Will be populated from client creation or selection
+  policyTypeId: z.number().min(1, "Please select a policy type"),
+  captureDate: z.date(),
+  inceptionDate: z.date().nullable(),
+  // Status will always be "pending" for new policies
+  status: z.string().default("pending").optional(),
+  frequency: z.string().min(1, "Please select a payment frequency"),
+  renewalDate: z.date().nullable(),
+}).omit({ policyNumber: true }); // Remove policy number from form requirements
+
+// Client form schema
+const clientFormSchema = insertClientSchema.extend({
+  name: z.string().min(2, "Name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(8, "Phone number must be at least 8 characters"),
+  address: z.string().min(5, "Address must be at least 5 characters"),
+  dateOfBirth: z.date({
+    required_error: "Date of birth is required",
+  }),
+  gender: z.string({
+    required_error: "Gender is required",
+  }).min(1, "Please select a gender"),
+  idNumber: z.string().min(1, "ID number is required"),
+  occupation: z.string().optional(),
+  employerName: z.string().optional(),
+});
+
+// Import the validation functions
+import { validateSouthAfricanID, getDateOfBirthFromIDNumber, getGenderFromIDNumber } from "@/lib/utils";
+
+// Dependent form schema with ID number validation
+const dependentFormSchema = insertDependentSchema.extend({
+  name: z.string().min(1, "Name is required"),
+  relationship: z.string().min(1, "Relationship is required"),
+  // Make these fields truly optional
+  dateOfBirth: z.date().optional().nullable(),
+  gender: z.string().optional().nullable().or(z.literal("")),
+  idNumber: z.string().optional().nullable().or(z.literal(""))
+    .refine(value => {
+      // Skip validation if no ID number provided
+      if (!value) return true;
+      
+      // Validate South African ID number
+      return validateSouthAfricanID(value);
+    }, { message: "Invalid South African ID number" }),
+});
+
+// Bank detail form schema
+const bankDetailFormSchema = insertBankDetailSchema.extend({
+  accountHolderName: z.string().min(2, "Account holder name must be at least 2 characters"),
+  accountNumber: z.string().min(5, "Account number must be at least 5 characters"),
+  bankName: z.string().min(1, "Please select a bank"),
+  accountType: z.string().min(1, "Please select an account type"),
+  branchCode: z.string().min(1, "Branch code is required"),
+  isDefault: z.boolean().default(true),
+});
+
+// Define types for all forms
+type PolicyFormValues = z.infer<typeof policyFormSchema>;
+type ClientFormValues = z.infer<typeof clientFormSchema>;
+type DependentFormValues = z.infer<typeof dependentFormSchema>;
+type BankDetailFormValues = z.infer<typeof bankDetailFormSchema>;
+
+type PolicySignupFormProps = {
+  onComplete?: (policyData: any) => void;
+};
+
+export function PolicySignupForm({ onComplete }: PolicySignupFormProps) {
+  const { toast } = useToast();
+  const queryClient = useQueryClient();
+  const [step, setStep] = useState(1);
+  const [, navigate] = useLocation();
+  const [dependents, setDependents] = useState<DependentFormValues[]>([]);
+  const [isAddingDependent, setIsAddingDependent] = useState(false);
+  const [currentClientId, setCurrentClientId] = useState<number | null>(null);
+  const [selectedBank, setSelectedBank] = useState<string>("");
+  
+  // Gamification disabled for now
+  
+  // Forms for each step
+  const clientForm = useForm<ClientFormValues>({
+    resolver: zodResolver(clientFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+    },
+  });
+
+  const dependentForm = useForm<DependentFormValues>({
+    resolver: zodResolver(dependentFormSchema),
+    defaultValues: {
+      name: "",
+      relationship: "child", // Set default relationship
+      dateOfBirth: undefined,
+      gender: "",
+      idNumber: "",
+    },
+  });
+
+  const policyForm = useForm<PolicyFormValues>({
+    resolver: zodResolver(policyFormSchema),
+    defaultValues: {
+      premium: 0,
+      policyTypeId: 0,
+      captureDate: new Date(), // Today's date
+      inceptionDate: null, // Will be set when payment is received
+      // Status is always set to pending by default, no form field needed
+      status: "pending",
+      frequency: "monthly",
+      renewalDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
+    },
+  });
+
+  const bankDetailForm = useForm<BankDetailFormValues>({
+    resolver: zodResolver(bankDetailFormSchema),
+    defaultValues: {
+      accountHolderName: "",
+      accountNumber: "",
+      bankName: "",
+      accountType: "cheque",
+      branchCode: "",
+      isDefault: true,
+    },
+  });
+
+  // Queries
+  const { data: clients = [] } = useQuery({
+    queryKey: ["/api/clients"],
+  });
+
+  const { data: policyTypes = [] } = useQuery({
+    queryKey: ["/api/policy-types"],
+  });
+
+  // Mutations
+  const createClient = useMutation({
+    mutationFn: async (client: ClientFormValues) => {
+      const response = await apiRequest("POST", "/api/clients", client);
+      const data = await response.json();
+      return data;
+    },
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["/api/clients"] });
+      toast({
+        title: "Success!",
+        description: "Client has been created successfully.",
+      });
+      // Set the created client ID for use in subsequent steps
+      setCurrentClientId(data.id);
+      // Move to next step
+      setStep(2);
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to create client. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error creating client:", error);
+    },
+  });
+
+  const createBankDetail = useMutation({
+    mutationFn: async (bankDetail: BankDetailFormValues & { clientId: number }) => {
+      const response = await apiRequest("POST", "/api/bank-details", bankDetail);
+      const data = await response.json();
+      return data;
+    },
+  });
+
+  const createDependent = useMutation({
+    mutationFn: async (dependent: DependentFormValues & { clientId: number }) => {
+      const response = await apiRequest("POST", "/api/dependents", dependent);
+      const data = await response.json();
+      return data;
+    },
+  });
+
+  const createPolicyWithDependents = useMutation({
+    mutationFn: async (data: { policy: PolicyFormValues, bankDetailId?: number, dependentIds?: number[] }) => {
+      // First create the policy
+      const policyResponse = await apiRequest("POST", "/api/policies", {
+        ...data.policy,
+        // The policy number will be generated on the server
+        bankDetailId: data.bankDetailId
+      });
+      const policy = await policyResponse.json();
+      
+      // Then add any dependents to the policy
+      if (data.dependentIds && data.dependentIds.length > 0) {
+        await Promise.all(data.dependentIds.map(async dependentId => {
+          const response = await apiRequest("POST", "/api/policy-dependents", {
+            policyId: policy.id,
+            dependentId,
+            coveragePercentage: 100 // Default coverage
+          });
+          return response.json();
+        }));
+      }
+      
+      return policy;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["/api/policies"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/recent"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/policies/renewals"] });
+      queryClient.invalidateQueries({ queryKey: ["/api/dashboard/stats"] });
+      
+      toast({
+        title: "Success!",
+        description: "Policy has been created successfully.",
+      });
+      
+      // Navigate to policies page
+      navigate("/policies");
+    },
+    onError: (error) => {
+      toast({
+        title: "Error",
+        description: "Failed to create policy. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error creating policy:", error);
+    },
+  });
+
+  // Handle dependent form submission
+  const handleAddDependent = async () => {
+    // Basic name validation - only check for name
+    if (!dependentForm.getValues().name) {
+      toast({
+        title: "Validation Error",
+        description: "Dependent name is required.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Set relationship based on current step if not provided
+    if (!dependentForm.getValues().relationship) {
+      const stepToRelationship = {
+        2: "child",
+        3: "parent",
+        4: "spouse",
+        5: "beneficiary"
+      };
+      
+      const defaultRelationship = stepToRelationship[step as keyof typeof stepToRelationship];
+      
+      if (defaultRelationship) {
+        dependentForm.setValue("relationship", defaultRelationship);
+      }
+    }
+    
+    // Handle optional fields with null/undefined values
+    const formData = dependentForm.getValues();
+    
+    // Validate South African ID number if provided
+    if (formData.idNumber && formData.idNumber.length > 0) {
+      // Check ID number length
+      if (formData.idNumber.length !== 13) {
+        toast({
+          title: "Validation Error",
+          description: "The South African ID number must be exactly 13 digits.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Validate using Luhn algorithm
+      const isValidID = validateSouthAfricanID(formData.idNumber);
+      
+      if (!isValidID) {
+        toast({
+          title: "Validation Error",
+          description: "The South African ID number is invalid. Please check the number and try again.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Check if ID number matches main member's ID number
+      const mainMemberIdNumber = clientForm.getValues().idNumber;
+      if (mainMemberIdNumber && formData.idNumber === mainMemberIdNumber) {
+        toast({
+          title: "Validation Error",
+          description: "Dependent's ID number cannot be the same as the main member's ID number.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Check if ID number is already used by another dependent
+      const duplicateId = dependents.some(
+        dependent => dependent.idNumber && dependent.idNumber === formData.idNumber
+      );
+      
+      if (duplicateId) {
+        toast({
+          title: "Validation Error",
+          description: "This ID number is already used by another dependent on this policy.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Auto-fill date of birth and gender if not already set
+      if (isValidID) {
+        // Only set date of birth if not already provided
+        if (!formData.dateOfBirth) {
+          const dateOfBirth = getDateOfBirthFromIDNumber(formData.idNumber);
+          if (dateOfBirth) {
+            dependentForm.setValue("dateOfBirth", dateOfBirth);
+            formData.dateOfBirth = dateOfBirth;
+          }
+        }
+        
+        // Only set gender if not already provided
+        if (!formData.gender) {
+          const gender = getGenderFromIDNumber(formData.idNumber);
+          if (gender) {
+            dependentForm.setValue("gender", gender);
+            formData.gender = gender;
+          }
+        }
+      }
+    }
+    
+    // Create a sanitized version of the data
+    const cleanData: DependentFormValues = {
+      name: formData.name,
+      relationship: formData.relationship || "",
+      dateOfBirth: formData.dateOfBirth || null,
+      gender: formData.gender || "",
+      idNumber: formData.idNumber || "",
+      clientId: formData.clientId
+    };
+    
+    // Add dependent to local state with sanitized data
+    setDependents([...dependents, cleanData]);
+    
+    // Reset form with appropriate relationship for the current step
+    const defaultRelationship = step === 2 ? "child" : 
+                              step === 3 ? "parent" : 
+                              step === 4 ? "spouse" : 
+                              step === 5 ? "beneficiary" : "";
+    
+    dependentForm.reset({
+      name: "",
+      relationship: defaultRelationship,
+      dateOfBirth: undefined,
+      gender: "",
+      idNumber: "",
+    });
+    
+    // Close form
+    setIsAddingDependent(false);
+    
+    toast({
+      title: "Success",
+      description: "Dependent has been added successfully.",
+    });
+  };
+  
+  const removeDependent = (index: number) => {
+    setDependents(dependents.filter((_, i) => i !== index));
+  };
+
+  // Step handlers
+  const handleClientStep = async () => {
+    // First check if all fields are valid
+    const isValid = await clientForm.trigger();
+    if (!isValid) {
+      toast({
+        title: "Validation Error",
+        description: "Please complete all required client information fields correctly.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Additional validation for South African ID Number if provided
+    const idNumber = clientForm.getValues().idNumber;
+    if (idNumber && idNumber.length > 0) {
+      // First check that ID number is exactly 13 digits
+      if (idNumber.length !== 13) {
+        toast({
+          title: "ID Number Validation Error",
+          description: "The South African ID number must be exactly 13 digits.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // If ID number is 13 digits but invalid, show error
+      if (!validateSouthAfricanID(idNumber)) {
+        toast({
+          title: "ID Number Validation Error",
+          description: "The South African ID number is invalid. Please check and correct it.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      // Auto-fill date of birth and gender if not already provided
+      if (validateSouthAfricanID(idNumber)) {
+        const formData = clientForm.getValues();
+        
+        // Only set date of birth if not already provided
+        if (!formData.dateOfBirth) {
+          const dateOfBirth = getDateOfBirthFromIDNumber(idNumber);
+          if (dateOfBirth) {
+            clientForm.setValue("dateOfBirth", dateOfBirth);
+          }
+        }
+        
+        // Only set gender if not already provided
+        if (!formData.gender) {
+          const gender = getGenderFromIDNumber(idNumber);
+          if (gender) {
+            clientForm.setValue("gender", gender);
+          }
+        }
+      }
+    }
+    
+    // Validate and submit form
+    clientForm.handleSubmit((data) => {
+      createClient.mutate(data);
+    })();
+  };
+
+  const handleChildrenStep = () => {
+    // No validation needed here, children are optional
+    setStep(3);
+  };
+  
+  const handleExtendedFamilyStep = () => {
+    // No validation needed here, extended family members are optional
+    setStep(4);
+  };
+  
+  const handleSpouseStep = () => {
+    // No validation needed here, spouse is optional
+    setStep(5);
+  };
+  
+  const handleBeneficiaryStep = () => {
+    // Validate that at least one beneficiary has been added
+    const hasBeneficiaries = dependents.some(dependent => dependent.relationship === "beneficiary");
+    
+    if (!hasBeneficiaries) {
+      toast({
+        title: "Beneficiary Required",
+        description: "You must add at least one beneficiary before proceeding.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Proceed to next step if validation passes
+    setStep(6);
+  };
+  
+  const handlePolicyTypeSelection = () => {
+    // Pre-fill account holder name with client name if it's empty
+    if (clientForm.getValues().name && (!bankDetailForm.getValues().accountHolderName || bankDetailForm.getValues().accountHolderName === "")) {
+      bankDetailForm.setValue('accountHolderName', clientForm.getValues().name);
+    }
+    
+    // No validation needed here, moving to policy selection
+    setStep(7);
+  };
+
+  const handlePolicyTypeStep = async () => {
+    // First check if all fields are valid
+    const isValid = await policyForm.trigger();
+    if (!isValid) {
+      toast({
+        title: "Validation Error",
+        description: "Please complete all required policy information fields correctly.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Pre-fill account holder name with client name if it's empty
+    if (clientForm.getValues().name && (!bankDetailForm.getValues().accountHolderName || bankDetailForm.getValues().accountHolderName === "")) {
+      bankDetailForm.setValue('accountHolderName', clientForm.getValues().name);
+    }
+    
+    // If all is valid, proceed to next step (Bank Details)
+    policyForm.handleSubmit(() => {
+      setStep(7);
+    })();
+  };
+
+  const handleBankDetailsStep = async () => {
+    if (!currentClientId) {
+      toast({
+        title: "Error",
+        description: "Client information is missing.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Set default values for fields if they're empty
+    const bankName = bankDetailForm.getValues().bankName;
+    const accountHolderName = bankDetailForm.getValues().accountHolderName;
+    const accountNumber = bankDetailForm.getValues().accountNumber;
+    const accountType = bankDetailForm.getValues().accountType;
+    const branchCode = bankDetailForm.getValues().branchCode;
+    
+    if (!bankName) {
+      toast({
+        title: "Bank Details Required",
+        description: "Please select a bank name.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!accountHolderName) {
+      toast({
+        title: "Bank Details Required",
+        description: "Please enter the account holder name.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!accountNumber) {
+      toast({
+        title: "Bank Details Required",
+        description: "Please enter the account number.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    if (!accountType) {
+      bankDetailForm.setValue('accountType', 'cheque');
+    }
+    
+    if (!branchCode && bankName !== "Other") {
+      // Get branch code from default branch codes
+      const defaultBranchCodes: Record<string, string> = {
+        "ABSA": "632005",
+        "Capitec Bank": "470010",
+        "First National Bank": "250655",
+        "Nedbank": "198765",
+        "Standard Bank": "051001",
+        "African Bank": "430000",
+        "Bidvest Bank": "462005",
+        "Discovery Bank": "679000",
+        "Investec": "580105",
+        "Tyme Bank": "678910",
+        "Mukuru": "800001",
+        "Ubank": "431010",
+        "Sasfin Bank": "683000",
+        "Grindrod Bank": "584000",
+        "HBZ Bank": "700100",
+        "Mercantile Bank": "450105",
+      };
+      
+      if (defaultBranchCodes[bankName]) {
+        bankDetailForm.setValue('branchCode', defaultBranchCodes[bankName]);
+      }
+    } else if (!branchCode && bankName === "Other") {
+      toast({
+        title: "Bank Details Required",
+        description: "Please enter the branch code for this bank.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Skip the Zod validation which is causing issues
+    // We've already manually checked all the required fields above
+    if (!bankName || !accountHolderName || !accountNumber || !accountType || !branchCode) {
+      toast({
+        title: "Validation Error",
+        description: "Please complete all required bank detail fields correctly.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    // Create an array of promises for dependent creation
+    const dependentPromises = dependents.map(dependent => 
+      createDependent.mutateAsync({
+        ...dependent,
+        clientId: currentClientId
+      })
+    );
+    
+    // First create the bank detail
+    const bankDetailData = bankDetailForm.getValues();
+    
+    try {
+      // Create the bank detail first
+      const bankDetail = await createBankDetail.mutateAsync({
+        ...bankDetailData,
+        clientId: currentClientId
+      });
+      
+      // Then create all the dependents
+      const createdDependents = await Promise.all(dependentPromises);
+      
+      // Finally create the policy
+      const policyData = policyForm.getValues();
+      
+      await createPolicyWithDependents.mutateAsync({
+        policy: {
+          ...policyData,
+          clientId: currentClientId,
+          status: "pending" // Always set status to pending for new policies
+        },
+        bankDetailId: bankDetail.id,
+        dependentIds: createdDependents.map(d => d.id)
+      });
+      
+      if (onComplete) {
+        onComplete({
+          policy: policyData,
+          client: clientForm.getValues(),
+          dependents,
+          bankDetail: bankDetailData
+        });
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to create policy. Please try again.",
+        variant: "destructive",
+      });
+      console.error("Error creating policy:", error);
+    }
+  };
+  
+  // Render the step indicator
+  const renderStepIndicator = () => {
+    const steps = [
+      { number: 1, name: "Main Member", icon: <User className="h-4 w-4" /> },
+      { number: 2, name: "Children", icon: <Users className="h-4 w-4" /> },
+      { number: 3, name: "Extended Family", icon: <Users className="h-4 w-4" /> },
+      { number: 4, name: "Spouse", icon: <Heart className="h-4 w-4" /> },
+      { number: 5, name: "Beneficiaries", icon: <Gift className="h-4 w-4" /> },
+      { number: 6, name: "Policy Type", icon: <FileText className="h-4 w-4" /> },
+      { number: 7, name: "Bank Details", icon: <Landmark className="h-4 w-4" /> }
+    ];
+    
+    return (
+      <div className="flex flex-col items-center mb-8 relative">
+        <div className="flex justify-between w-full max-w-4xl mb-2">
+          {steps.map((s) => (
+            <div key={s.number} className="flex flex-col items-center cursor-pointer group" onClick={() => step >= s.number && setStep(s.number)}>
+              <div 
+                className={`w-10 h-10 rounded-full flex items-center justify-center border-2 shadow-sm transition-all duration-300 ${
+                  step === s.number 
+                    ? "border-primary bg-primary text-white scale-110" 
+                    : step > s.number 
+                      ? "border-green-500 bg-green-500 text-white group-hover:scale-105" 
+                      : "border-gray-300 text-gray-500 group-hover:border-gray-400"
+                }`}
+              >
+                {step > s.number ? (
+                  <CheckCircle2 className="h-5 w-5" />
+                ) : (
+                  s.icon || s.number
+                )}
+              </div>
+              <span className={`text-xs font-medium mt-2 text-center transition-colors duration-200 ${
+                step === s.number ? "text-primary" : "text-gray-600"
+              }`}>
+                {s.name}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="w-full max-w-4xl h-1.5 bg-gray-200 rounded-full absolute top-5 z-[-1]">
+          <div 
+            className="h-full bg-gradient-to-r from-primary/80 to-primary rounded-full transition-all duration-300 ease-in-out" 
+            style={{ width: `${((step - 1) / (steps.length - 1)) * 100}%` }} 
+          />
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="container py-8">
+      <h1 className="text-3xl font-bold mb-8 text-center">New Policy Application</h1>
+      
+      {renderStepIndicator()}
+      
+      {/* Step 1: Client Information */}
+      {step === 1 && (
+        <Card className="mb-6 shadow-lg border-0">
+          <CardHeader className="bg-muted/50 rounded-t-lg">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-primary rounded-full text-white">
+                <User className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle>Main Member Information</CardTitle>
+                <CardDescription>
+                  Enter the details of the main policyholder
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6">
+              <Form {...clientForm}>
+                <form className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <FormField
+                      control={clientForm.control}
+                      name="name"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel className="font-medium">
+                            <span className="flex items-center gap-2">
+                              <User className="h-4 w-4 text-muted-foreground" />
+                              Full Name
+                            </span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input {...field} className="border-muted-foreground/20" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={clientForm.control}
+                      name="email"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel className="font-medium">
+                            <span className="flex items-center gap-2">
+                              <Mail className="h-4 w-4 text-muted-foreground" />
+                              Email Address
+                            </span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input {...field} type="email" className="border-muted-foreground/20" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={clientForm.control}
+                      name="phone"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel className="font-medium">
+                            <span className="flex items-center gap-2">
+                              <Phone className="h-4 w-4 text-muted-foreground" />
+                              Phone Number
+                            </span>
+                          </FormLabel>
+                          <FormControl>
+                            <Input {...field} className="border-muted-foreground/20" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={clientForm.control}
+                      name="address"
+                      render={({ field }) => (
+                        <FormItem className="space-y-2">
+                          <FormLabel className="font-medium">
+                            <span className="flex items-center gap-2">
+                              <MapPin className="h-4 w-4 text-muted-foreground" />
+                              Address
+                            </span>
+                          </FormLabel>
+                          <FormControl>
+                            <Textarea {...field} className="border-muted-foreground/20 min-h-[80px]" />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <FormField
+                      control={clientForm.control}
+                      name="idNumber"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>ID Number (South African)</FormLabel>
+                          <FormControl>
+                            <Input 
+                              {...field} 
+                              onChange={(e) => {
+                                field.onChange(e);
+                                const idNumber = e.target.value;
+                                
+                                // Auto-fill date of birth and gender if valid ID number
+                                if (idNumber && idNumber.length === 13) {
+                                  const dateOfBirth = getDateOfBirthFromIDNumber(idNumber);
+                                  const gender = getGenderFromIDNumber(idNumber);
+                                  
+                                  if (dateOfBirth) {
+                                    clientForm.setValue("dateOfBirth", dateOfBirth);
+                                  }
+                                  
+                                  if (gender) {
+                                    clientForm.setValue("gender", gender);
+                                  }
+                                }
+                              }}
+                            />
+                          </FormControl>
+                          <FormMessage />
+                          {field.value && (
+                            field.value.length !== 13 ? (
+                              <p className="text-xs text-amber-600 mt-1">
+                                South African ID must be 13 digits
+                              </p>
+                            ) : (
+                              <p className={validateSouthAfricanID(field.value) 
+                                ? "text-xs text-green-600 mt-1" 
+                                : "text-xs text-red-600 mt-1"
+                              }>
+                                {validateSouthAfricanID(field.value) 
+                                  ? "✓ Valid South African ID" 
+                                  : "✗ Invalid South African ID"}
+                              </p>
+                            )
+                          )}
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={clientForm.control}
+                      name="dateOfBirth"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Date of Birth</FormLabel>
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <FormControl>
+                                <Button
+                                  variant="outline"
+                                  className={cn(
+                                    "w-full pl-3 text-left font-normal",
+                                    !field.value && "text-muted-foreground"
+                                  )}
+                                >
+                                  {field.value ? (
+                                    format(field.value, "PPP")
+                                  ) : (
+                                    <span>Pick a date</span>
+                                  )}
+                                  <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                </Button>
+                              </FormControl>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={field.value}
+                                onSelect={field.onChange}
+                                initialFocus
+                                disabled={(date) => date > new Date()}
+                              />
+                            </PopoverContent>
+                          </Popover>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={clientForm.control}
+                      name="gender"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Gender</FormLabel>
+                          <Select onValueChange={field.onChange} value={field.value || ""}>
+                            <FormControl>
+                              <SelectTrigger>
+                                <SelectValue placeholder="Select gender" />
+                              </SelectTrigger>
+                            </FormControl>
+                            <SelectContent>
+                              <SelectItem value="male">Male</SelectItem>
+                              <SelectItem value="female">Female</SelectItem>
+                              <SelectItem value="other">Other</SelectItem>
+                            </SelectContent>
+                          </Select>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  </div>
+
+
+                </form>
+              </Form>
+          </CardContent>
+          <CardFooter className="flex justify-end">
+            <Button 
+              type="button" 
+              onClick={handleClientStep}
+              disabled={createClient.isPending}
+            >
+              Next <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+
+      {/* Step 2: Children */}
+      {step === 2 && (
+        <Card className="mb-6 shadow-lg border-0">
+          <CardHeader className="bg-muted/50 rounded-t-lg">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-primary rounded-full text-white">
+                <Users className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle>Children</CardTitle>
+                <CardDescription>
+                  Add your children who will be covered under this policy
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-6">
+            {dependents.filter(d => d.relationship === 'child').length > 0 && (
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-medium">Added Children</h3>
+                </div>
+                <div className="space-y-3">
+                  {dependents.filter(d => d.relationship === 'child').map((dependent, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 border border-muted-foreground/20 rounded-md bg-background shadow-sm transition-all duration-200 hover:shadow-md">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-primary/10 rounded-full">
+                          <Users className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-medium">{dependent.name}</p>
+                          <p className="text-sm text-muted-foreground">Child</p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeDependent(dependents.indexOf(dependent))}
+                        className="text-gray-500 hover:text-red-500 hover:bg-red-50"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {!isAddingDependent ? (
+              <Button
+                type="button"
+                variant="outline"
+                className="flex items-center"
+                onClick={() => {
+                  setIsAddingDependent(true);
+                  dependentForm.setValue("relationship", "child");
+                }}
+              >
+                <Plus className="mr-2 h-4 w-4" /> Add Child
+              </Button>
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Add New Child</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Form {...dependentForm}>
+                    <form className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Child's Full Name</FormLabel>
+                              <FormControl>
+                                <Input {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        {/* Hidden field - automatically set to "child" */}
+                        <input 
+                          type="hidden" 
+                          {...dependentForm.register("relationship")} 
+                          value="child" 
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="dateOfBirth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Date of Birth</FormLabel>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <FormControl>
+                                    <Button
+                                      variant="outline"
+                                      className={cn(
+                                        "w-full pl-3 text-left font-normal",
+                                        !field.value && "text-muted-foreground"
+                                      )}
+                                    >
+                                      {field.value ? (
+                                        format(field.value, "PPP")
+                                      ) : (
+                                        <span>Pick a date</span>
+                                      )}
+                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    </Button>
+                                  </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                  <Calendar
+                                    mode="single"
+                                    selected={field.value}
+                                    onSelect={field.onChange}
+                                    initialFocus
+                                    disabled={(date) => date > new Date()}
+                                  />
+                                </PopoverContent>
+                              </Popover>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="gender"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Gender</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value || ""}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select gender" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="male">Male</SelectItem>
+                                  <SelectItem value="female">Female</SelectItem>
+                                  <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="idNumber"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID Number</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field} 
+                                  onChange={(e) => {
+                                    field.onChange(e);
+                                    const idNumber = e.target.value;
+                                    
+                                    // Auto-fill date of birth and gender if valid ID number
+                                    if (idNumber && idNumber.length === 13 && validateSouthAfricanID(idNumber)) {
+                                      const dateOfBirth = getDateOfBirthFromIDNumber(idNumber);
+                                      const gender = getGenderFromIDNumber(idNumber);
+                                      
+                                      if (dateOfBirth) {
+                                        dependentForm.setValue("dateOfBirth", dateOfBirth);
+                                      }
+                                      
+                                      if (gender) {
+                                        dependentForm.setValue("gender", gender);
+                                      }
+                                    }
+                                  }}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                              {field.value && (
+                                field.value.length !== 13 ? (
+                                  <p className="text-xs text-amber-600 mt-1">
+                                    South African ID must be 13 digits
+                                  </p>
+                                ) : (
+                                  <p className={validateSouthAfricanID(field.value) 
+                                    ? "text-xs text-green-600 mt-1" 
+                                    : "text-xs text-red-600 mt-1"
+                                  }>
+                                    {validateSouthAfricanID(field.value) 
+                                      ? "✓ Valid South African ID" 
+                                      : "✗ Invalid South African ID"}
+                                  </p>
+                                )
+                              )}
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+
+                    </form>
+                  </Form>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setIsAddingDependent(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      // For the child form, just enforce simple validation
+                      // Just check if name is entered
+                      if (!dependentForm.getValues().name) {
+                        toast({
+                          title: "Error",
+                          description: "Please enter at least the child's name",
+                          variant: "destructive",
+                        });
+                        return;
+                      }
+                      
+                      // Always ensure relationship is set to "child"
+                      dependentForm.setValue("relationship", "child");
+                      
+                      // Create a simplified dependent object with just the essential data
+                      const data = dependentForm.getValues();
+                      
+                      // Add it directly to the array of dependents
+                      setDependents([...dependents, data]);
+                      
+                      // Reset form
+                      dependentForm.reset({
+                        name: "",
+                        relationship: "child",
+                        dateOfBirth: undefined,
+                        gender: "",
+                        idNumber: "",
+                      });
+                      
+                      // Close add form
+                      setIsAddingDependent(false);
+                      
+                      toast({
+                        title: "Success",
+                        description: "Child has been added successfully.",
+                      });
+                    }}
+                  >
+                    Add Child
+                  </Button>
+                </CardFooter>
+              </Card>
+            )}
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button 
+              type="button"
+              variant="outline"
+              onClick={() => setStep(1)}
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+            </Button>
+            
+            <Button 
+              type="button"
+              onClick={handleChildrenStep}
+            >
+              Next <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+
+      {/* Step 3: Extended Family */}
+      {step === 3 && (
+        <Card className="mb-6 shadow-lg border-0">
+          <CardHeader className="bg-muted/50 rounded-t-lg">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-primary rounded-full text-white">
+                <Users className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle>Extended Family</CardTitle>
+                <CardDescription>
+                  Add extended family members (like parents) to be covered under this policy
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-6">
+            {dependents.filter(d => d.relationship === 'parent').length > 0 && (
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <Users className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-medium">Added Family Members</h3>
+                </div>
+                <div className="space-y-3">
+                  {dependents.filter(d => d.relationship === 'parent').map((dependent, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 border border-muted-foreground/20 rounded-md bg-background shadow-sm transition-all duration-200 hover:shadow-md">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-primary/10 rounded-full">
+                          <Users className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-medium">{dependent.name}</p>
+                          <p className="text-sm text-muted-foreground">Parent</p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeDependent(dependents.indexOf(dependent))}
+                        className="text-gray-500 hover:text-red-500 hover:bg-red-50"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {!isAddingDependent ? (
+              <Button
+                type="button"
+                variant="outline"
+                className="flex items-center"
+                onClick={() => {
+                  setIsAddingDependent(true);
+                  dependentForm.setValue("relationship", "parent");
+                }}
+              >
+                <Plus className="mr-2 h-4 w-4" /> Add Family Member
+              </Button>
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Add Family Member</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Form {...dependentForm}>
+                    <form className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Full Name</FormLabel>
+                              <FormControl>
+                                <Input {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="relationship"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Relationship</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value || ""}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select relationship" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="parent">Parent</SelectItem>
+                                  <SelectItem value="sibling">Sibling</SelectItem>
+                                  <SelectItem value="grandparent">Grandparent</SelectItem>
+                                  <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="dateOfBirth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Date of Birth</FormLabel>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <FormControl>
+                                    <Button
+                                      variant="outline"
+                                      className={cn(
+                                        "w-full pl-3 text-left font-normal",
+                                        !field.value && "text-muted-foreground"
+                                      )}
+                                    >
+                                      {field.value ? (
+                                        format(field.value, "PPP")
+                                      ) : (
+                                        <span>Pick a date</span>
+                                      )}
+                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    </Button>
+                                  </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                  <Calendar
+                                    mode="single"
+                                    selected={field.value}
+                                    onSelect={field.onChange}
+                                    initialFocus
+                                    disabled={(date) => date > new Date()}
+                                  />
+                                </PopoverContent>
+                              </Popover>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="gender"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Gender</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value || ""}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select gender" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="male">Male</SelectItem>
+                                  <SelectItem value="female">Female</SelectItem>
+                                  <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="idNumber"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID Number</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field} 
+                                  onChange={(e) => {
+                                    field.onChange(e);
+                                    const idNumber = e.target.value;
+                                    
+                                    // Auto-fill date of birth and gender if valid ID number
+                                    if (idNumber && idNumber.length === 13 && validateSouthAfricanID(idNumber)) {
+                                      const dateOfBirth = getDateOfBirthFromIDNumber(idNumber);
+                                      const gender = getGenderFromIDNumber(idNumber);
+                                      
+                                      if (dateOfBirth) {
+                                        dependentForm.setValue("dateOfBirth", dateOfBirth);
+                                      }
+                                      
+                                      if (gender) {
+                                        dependentForm.setValue("gender", gender);
+                                      }
+                                    }
+                                  }}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                              {field.value && (
+                                field.value.length !== 13 ? (
+                                  <p className="text-xs text-amber-600 mt-1">
+                                    South African ID must be 13 digits
+                                  </p>
+                                ) : (
+                                  <p className={validateSouthAfricanID(field.value) 
+                                    ? "text-xs text-green-600 mt-1" 
+                                    : "text-xs text-red-600 mt-1"
+                                  }>
+                                    {validateSouthAfricanID(field.value) 
+                                      ? "✓ Valid South African ID" 
+                                      : "✗ Invalid South African ID"}
+                                  </p>
+                                )
+                              )}
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </form>
+                  </Form>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setIsAddingDependent(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={handleAddDependent}
+                  >
+                    Add Family Member
+                  </Button>
+                </CardFooter>
+              </Card>
+            )}
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button 
+              type="button"
+              variant="outline"
+              onClick={() => setStep(2)}
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+            </Button>
+            
+            <Button 
+              type="button"
+              onClick={handleExtendedFamilyStep}
+            >
+              Next <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+
+      {/* Step 4: Spouse */}
+      {step === 4 && (
+        <Card className="mb-6 shadow-lg border-0">
+          <CardHeader className="bg-muted/50 rounded-t-lg">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-primary rounded-full text-white">
+                <Heart className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle>Spouse</CardTitle>
+                <CardDescription>
+                  Add your spouse or partner to be covered under this policy
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-6">
+            {dependents.filter(d => d.relationship === 'spouse').length > 0 && (
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <Heart className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-medium">Added Spouse</h3>
+                </div>
+                <div className="space-y-3">
+                  {dependents.filter(d => d.relationship === 'spouse').map((dependent, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 border border-muted-foreground/20 rounded-md bg-background shadow-sm transition-all duration-200 hover:shadow-md">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-primary/10 rounded-full">
+                          <Heart className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-medium">{dependent.name}</p>
+                          <p className="text-sm text-muted-foreground">Spouse</p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeDependent(dependents.indexOf(dependent))}
+                        className="text-gray-500 hover:text-red-500 hover:bg-red-50"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {!isAddingDependent ? (
+              dependents.filter(d => d.relationship === 'spouse').length === 0 && (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="flex items-center"
+                  onClick={() => {
+                    setIsAddingDependent(true);
+                    dependentForm.setValue("relationship", "spouse");
+                  }}
+                >
+                  <Plus className="mr-2 h-4 w-4" /> Add Spouse
+                </Button>
+              )
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Add Spouse</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Form {...dependentForm}>
+                    <form className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Full Name</FormLabel>
+                              <FormControl>
+                                <Input {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        {/* Hidden field - automatically set to "spouse" */}
+                        <input 
+                          type="hidden" 
+                          {...dependentForm.register("relationship")} 
+                          value="spouse" 
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="dateOfBirth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Date of Birth</FormLabel>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <FormControl>
+                                    <Button
+                                      variant="outline"
+                                      className={cn(
+                                        "w-full pl-3 text-left font-normal",
+                                        !field.value && "text-muted-foreground"
+                                      )}
+                                    >
+                                      {field.value ? (
+                                        format(field.value, "PPP")
+                                      ) : (
+                                        <span>Pick a date</span>
+                                      )}
+                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    </Button>
+                                  </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                  <Calendar
+                                    mode="single"
+                                    selected={field.value}
+                                    onSelect={field.onChange}
+                                    initialFocus
+                                    disabled={(date) => date > new Date()}
+                                  />
+                                </PopoverContent>
+                              </Popover>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="gender"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Gender</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value || ""}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select gender" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="male">Male</SelectItem>
+                                  <SelectItem value="female">Female</SelectItem>
+                                  <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="idNumber"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID Number</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field} 
+                                  onChange={(e) => {
+                                    field.onChange(e);
+                                    const idNumber = e.target.value;
+                                    
+                                    // Auto-fill date of birth and gender if valid ID number
+                                    if (idNumber && idNumber.length === 13 && validateSouthAfricanID(idNumber)) {
+                                      const dateOfBirth = getDateOfBirthFromIDNumber(idNumber);
+                                      const gender = getGenderFromIDNumber(idNumber);
+                                      
+                                      if (dateOfBirth) {
+                                        dependentForm.setValue("dateOfBirth", dateOfBirth);
+                                      }
+                                      
+                                      if (gender) {
+                                        dependentForm.setValue("gender", gender);
+                                      }
+                                    }
+                                  }}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                              {field.value && (
+                                field.value.length !== 13 ? (
+                                  <p className="text-xs text-amber-600 mt-1">
+                                    South African ID must be 13 digits
+                                  </p>
+                                ) : (
+                                  <p className={validateSouthAfricanID(field.value) 
+                                    ? "text-xs text-green-600 mt-1" 
+                                    : "text-xs text-red-600 mt-1"
+                                  }>
+                                    {validateSouthAfricanID(field.value) 
+                                      ? "✓ Valid South African ID" 
+                                      : "✗ Invalid South African ID"}
+                                  </p>
+                                )
+                              )}
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </form>
+                  </Form>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setIsAddingDependent(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={handleAddDependent}
+                  >
+                    Add Spouse
+                  </Button>
+                </CardFooter>
+              </Card>
+            )}
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button 
+              type="button"
+              variant="outline"
+              onClick={() => setStep(3)}
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+            </Button>
+            
+            <Button 
+              type="button"
+              onClick={handleSpouseStep}
+            >
+              Next <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+
+      {/* Step 5: Beneficiaries */}
+      {step === 5 && (
+        <Card className="mb-6 shadow-lg border-0">
+          <CardHeader className="bg-muted/50 rounded-t-lg">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-primary rounded-full text-white">
+                <Gift className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle>Beneficiaries</CardTitle>
+                <CardDescription>
+                  Add beneficiaries who will receive benefits in case of a claim
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6 space-y-6">
+            {dependents.filter(d => d.relationship === 'beneficiary').length > 0 && (
+              <div className="space-y-4 mb-6">
+                <div className="flex items-center gap-2">
+                  <Gift className="h-5 w-5 text-primary" />
+                  <h3 className="text-lg font-medium">Added Beneficiaries</h3>
+                </div>
+                <div className="space-y-3">
+                  {dependents.filter(d => d.relationship === 'beneficiary').map((dependent, index) => (
+                    <div key={index} className="flex items-center justify-between p-4 border border-muted-foreground/20 rounded-md bg-background shadow-sm transition-all duration-200 hover:shadow-md">
+                      <div className="flex items-center space-x-3">
+                        <div className="p-2 bg-primary/10 rounded-full">
+                          <Gift className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                          <p className="font-medium">{dependent.name}</p>
+                          <p className="text-sm text-muted-foreground">Beneficiary</p>
+                        </div>
+                      </div>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => removeDependent(dependents.indexOf(dependent))}
+                        className="text-gray-500 hover:text-red-500 hover:bg-red-50"
+                      >
+                        <X className="h-4 w-4" />
+                      </Button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {!isAddingDependent && dependents.filter(d => d.relationship === 'beneficiary').length < 1 ? (
+              <Button
+                type="button"
+                variant="outline"
+                className="flex items-center"
+                onClick={() => {
+                  setIsAddingDependent(true);
+                  dependentForm.setValue("relationship", "beneficiary");
+                }}
+              >
+                <Plus className="mr-2 h-4 w-4" /> Add Beneficiary (Required)
+              </Button>
+            ) : !isAddingDependent && dependents.filter(d => d.relationship === 'beneficiary').length > 0 ? (
+              <p className="text-sm text-muted-foreground italic">Only one beneficiary is allowed per policy.</p>
+            ) : (
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg">Add Beneficiary</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Form {...dependentForm}>
+                    <form className="space-y-4">
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="name"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Full Name</FormLabel>
+                              <FormControl>
+                                <Input {...field} />
+                              </FormControl>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        {/* Hidden field - automatically set to "beneficiary" */}
+                        <input 
+                          type="hidden" 
+                          {...dependentForm.register("relationship")} 
+                          value="beneficiary" 
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <FormField
+                          control={dependentForm.control}
+                          name="dateOfBirth"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Date of Birth</FormLabel>
+                              <Popover>
+                                <PopoverTrigger asChild>
+                                  <FormControl>
+                                    <Button
+                                      variant="outline"
+                                      className={cn(
+                                        "w-full pl-3 text-left font-normal",
+                                        !field.value && "text-muted-foreground"
+                                      )}
+                                    >
+                                      {field.value ? (
+                                        format(field.value, "PPP")
+                                      ) : (
+                                        <span>Pick a date</span>
+                                      )}
+                                      <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                                    </Button>
+                                  </FormControl>
+                                </PopoverTrigger>
+                                <PopoverContent className="w-auto p-0" align="start">
+                                  <Calendar
+                                    mode="single"
+                                    selected={field.value}
+                                    onSelect={field.onChange}
+                                    initialFocus
+                                    disabled={(date) => date > new Date()}
+                                  />
+                                </PopoverContent>
+                              </Popover>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="gender"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>Gender</FormLabel>
+                              <Select onValueChange={field.onChange} value={field.value || ""}>
+                                <FormControl>
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select gender" />
+                                  </SelectTrigger>
+                                </FormControl>
+                                <SelectContent>
+                                  <SelectItem value="male">Male</SelectItem>
+                                  <SelectItem value="female">Female</SelectItem>
+                                  <SelectItem value="other">Other</SelectItem>
+                                </SelectContent>
+                              </Select>
+                              <FormMessage />
+                            </FormItem>
+                          )}
+                        />
+                        <FormField
+                          control={dependentForm.control}
+                          name="idNumber"
+                          render={({ field }) => (
+                            <FormItem>
+                              <FormLabel>ID Number</FormLabel>
+                              <FormControl>
+                                <Input 
+                                  {...field} 
+                                  onChange={(e) => {
+                                    field.onChange(e);
+                                    const idNumber = e.target.value;
+                                    
+                                    // Auto-fill date of birth and gender if valid ID number
+                                    if (idNumber && idNumber.length === 13 && validateSouthAfricanID(idNumber)) {
+                                      const dateOfBirth = getDateOfBirthFromIDNumber(idNumber);
+                                      const gender = getGenderFromIDNumber(idNumber);
+                                      
+                                      if (dateOfBirth) {
+                                        dependentForm.setValue("dateOfBirth", dateOfBirth);
+                                      }
+                                      
+                                      if (gender) {
+                                        dependentForm.setValue("gender", gender);
+                                      }
+                                    }
+                                  }}
+                                />
+                              </FormControl>
+                              <FormMessage />
+                              {field.value && (
+                                field.value.length !== 13 ? (
+                                  <p className="text-xs text-amber-600 mt-1">
+                                    South African ID must be 13 digits
+                                  </p>
+                                ) : (
+                                  <p className={validateSouthAfricanID(field.value) 
+                                    ? "text-xs text-green-600 mt-1" 
+                                    : "text-xs text-red-600 mt-1"
+                                  }>
+                                    {validateSouthAfricanID(field.value) 
+                                      ? "✓ Valid South African ID" 
+                                      : "✗ Invalid South African ID"}
+                                  </p>
+                                )
+                              )}
+                            </FormItem>
+                          )}
+                        />
+                      </div>
+                    </form>
+                  </Form>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Button
+                    type="button"
+                    variant="outline"
+                    onClick={() => setIsAddingDependent(false)}
+                  >
+                    Cancel
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={handleAddDependent}
+                  >
+                    Add Beneficiary
+                  </Button>
+                </CardFooter>
+              </Card>
+            )}
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button 
+              type="button"
+              variant="outline"
+              onClick={() => setStep(4)}
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+            </Button>
+            
+            <Button 
+              type="button"
+              onClick={handleBeneficiaryStep}
+            >
+              Next <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+
+      {/* Step 6: Policy Type */}
+      {step === 6 && (
+        <Card className="mb-6 shadow-lg border-0">
+          <CardHeader className="bg-muted/50 rounded-t-lg">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-primary rounded-full text-white">
+                <FileText className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle>Policy Details</CardTitle>
+                <CardDescription>
+                  Select the policy type and specify details
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <Form {...policyForm}>
+              <form className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <FormField
+                    control={policyForm.control}
+                    name="policyTypeId"
+                    render={({ field }) => (
+                      <FormItem className="space-y-3">
+                        <FormLabel>Funeral Cover Plan</FormLabel>
+                        <FormControl>
+                          <div className="grid grid-cols-1 gap-3">
+                            {policyTypes.map((type: any) => (
+                              <label
+                                key={type.id}
+                                className={`flex items-center space-x-3 p-5 border rounded-lg cursor-pointer transition-all duration-200 shadow-sm ${
+                                  field.value === type.id
+                                    ? 'border-primary bg-primary/10 shadow-md'
+                                    : 'border-muted-foreground/20 hover:border-primary/50 hover:shadow'
+                                }`}
+                              >
+                                <div 
+                                  className={`flex items-center justify-center w-6 h-6 rounded-full border ${
+                                    field.value === type.id 
+                                      ? 'border-primary text-white bg-primary' 
+                                      : 'border-muted-foreground/30 text-transparent'
+                                  }`}
+                                >
+                                  <input
+                                    type="radio"
+                                    className="sr-only"
+                                    checked={field.value === type.id}
+                                    onChange={() => field.onChange(type.id)}
+                                  />
+                                  {field.value === type.id && <Check className="h-3 w-3" />}
+                                </div>
+                                <div className="flex flex-col">
+                                  <span className="font-medium text-base">{type.name}</span>
+                                  <span className="text-sm text-muted-foreground mt-1">
+                                    {type.description}
+                                  </span>
+                                  <span className="text-sm font-semibold text-primary mt-2">
+                                    Up to R{type.coverageAmount.toLocaleString()} coverage
+                                  </span>
+                                </div>
+                              </label>
+                            ))}
+                          </div>
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={policyForm.control}
+                    name="premium"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Premium Amount</FormLabel>
+                        <FormControl>
+                          <Input 
+                            type="number" 
+                            min="0" 
+                            step="0.01"
+                            onChange={(e) => field.onChange(parseFloat(e.target.value))}
+                            value={field.value === 0 ? '' : field.value}
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={policyForm.control}
+                    name="frequency"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Payment Frequency</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select payment frequency" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="monthly">Monthly</SelectItem>
+                            <SelectItem value="quarterly">Quarterly</SelectItem>
+                            <SelectItem value="biannually">Bi-annually</SelectItem>
+                            <SelectItem value="annually">Annually</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  {/* Status field removed - all new policies will be set to "pending" by default */}
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <FormField
+                    control={policyForm.control}
+                    name="captureDate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Capture Date</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              initialFocus
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={policyForm.control}
+                    name="inceptionDate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Inception Date</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value}
+                              onSelect={field.onChange}
+                              initialFocus
+                              fromDate={new Date()}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={policyForm.control}
+                    name="renewalDate"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Renewal Date</FormLabel>
+                        <Popover>
+                          <PopoverTrigger asChild>
+                            <FormControl>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-full pl-3 text-left font-normal",
+                                  !field.value && "text-muted-foreground"
+                                )}
+                              >
+                                {field.value ? (
+                                  format(field.value, "PPP")
+                                ) : (
+                                  <span>Pick a date</span>
+                                )}
+                                <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                              </Button>
+                            </FormControl>
+                          </PopoverTrigger>
+                          <PopoverContent className="w-auto p-0" align="start">
+                            <Calendar
+                              mode="single"
+                              selected={field.value || undefined}
+                              onSelect={field.onChange}
+                              initialFocus
+                              fromDate={new Date()}
+                            />
+                          </PopoverContent>
+                        </Popover>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+
+              </form>
+            </Form>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button 
+              type="button"
+              variant="outline"
+              onClick={() => setStep(5)}
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+            </Button>
+            
+            <Button 
+              type="button"
+              onClick={handlePolicyTypeSelection}
+            >
+              Next <ChevronRight className="ml-2 h-4 w-4" />
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+
+      {/* Step 7: Bank Details */}
+      {step === 7 && (
+        <Card className="mb-6 shadow-lg border-0">
+          <CardHeader className="bg-muted/50 rounded-t-lg">
+            <div className="flex items-center space-x-2">
+              <div className="p-2 bg-primary rounded-full text-white">
+                <Landmark className="h-5 w-5" />
+              </div>
+              <div>
+                <CardTitle>Bank Details</CardTitle>
+                <CardDescription>
+                  Add bank details for premium collection
+                </CardDescription>
+              </div>
+            </div>
+          </CardHeader>
+          <CardContent className="pt-6">
+            <Form {...bankDetailForm}>
+              <form className="space-y-6">
+                <FormField
+                  control={bankDetailForm.control}
+                  name="accountHolderName"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Account Holder Name</FormLabel>
+                      <FormControl>
+                        <Input {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <FormField
+                    control={bankDetailForm.control}
+                    name="bankName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Bank Name</FormLabel>
+                        <Select 
+                          onValueChange={(value) => {
+                            field.onChange(value);
+                            setSelectedBank(value);
+                            
+                            // Auto-fill branch code based on selected bank (universal branch codes)
+                            const defaultBranchCodes: Record<string, string> = {
+                              "ABSA": "632005",
+                              "Capitec Bank": "470010",
+                              "First National Bank": "250655",
+                              "Nedbank": "198765",
+                              "Standard Bank": "051001",
+                              "African Bank": "430000",
+                              "Bidvest Bank": "462005",
+                              "Discovery Bank": "679000",
+                              "Investec": "580105",
+                              "Tyme Bank": "678910",
+                              "Mukuru": "800001",
+                              "Ubank": "431010",
+                              "Sasfin Bank": "683000",
+                              "Grindrod Bank": "584000",
+                              "HBZ Bank": "700100",
+                              "Mercantile Bank": "450105",
+                              "Other": "",
+                            };
+                            
+                            if (defaultBranchCodes[value]) {
+                              bankDetailForm.setValue("branchCode", defaultBranchCodes[value]);
+                            } else if (value === "Other") {
+                              bankDetailForm.setValue("branchCode", "");
+                            }
+                          }} 
+                          value={field.value || ""}
+                        >
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select a bank" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="ABSA">ABSA</SelectItem>
+                            <SelectItem value="Capitec Bank">Capitec Bank</SelectItem>
+                            <SelectItem value="First National Bank">First National Bank (FNB)</SelectItem>
+                            <SelectItem value="Nedbank">Nedbank</SelectItem>
+                            <SelectItem value="Standard Bank">Standard Bank</SelectItem>
+                            <SelectItem value="African Bank">African Bank</SelectItem>
+                            <SelectItem value="Bidvest Bank">Bidvest Bank</SelectItem>
+                            <SelectItem value="Discovery Bank">Discovery Bank</SelectItem>
+                            <SelectItem value="Investec">Investec</SelectItem>
+                            <SelectItem value="Tyme Bank">TymeBank</SelectItem>
+                            <SelectItem value="Mukuru">Mukuru</SelectItem>
+                            <SelectItem value="Ubank">Ubank</SelectItem>
+                            <SelectItem value="Sasfin Bank">Sasfin Bank</SelectItem>
+                            <SelectItem value="Grindrod Bank">Grindrod Bank</SelectItem>
+                            <SelectItem value="HBZ Bank">HBZ Bank</SelectItem>
+                            <SelectItem value="Mercantile Bank">Mercantile Bank</SelectItem>
+                            <SelectItem value="Other">Other</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={bankDetailForm.control}
+                    name="accountNumber"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Account Number</FormLabel>
+                        <FormControl>
+                          <Input {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={bankDetailForm.control}
+                    name="accountType"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Account Type</FormLabel>
+                        <Select onValueChange={field.onChange} value={field.value}>
+                          <FormControl>
+                            <SelectTrigger>
+                              <SelectValue placeholder="Select account type" />
+                            </SelectTrigger>
+                          </FormControl>
+                          <SelectContent>
+                            <SelectItem value="cheque">Cheque Account</SelectItem>
+                            <SelectItem value="savings">Savings Account</SelectItem>
+                            <SelectItem value="transmission">Transmission Account</SelectItem>
+                          </SelectContent>
+                        </Select>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  
+                  <FormField
+                    control={bankDetailForm.control}
+                    name="branchCode"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Branch Code</FormLabel>
+                        <FormControl>
+                          <Input 
+                            {...field} 
+                            readOnly={selectedBank !== "Other" && selectedBank !== ""}
+                            className={selectedBank !== "Other" && selectedBank !== "" ? "bg-muted" : ""}
+                          />
+                        </FormControl>
+                        <FormDescription>
+                          Branch code automatically filled when you select a bank. Universal branch codes used for all South African banks.
+                          {selectedBank === "Other" && " Please enter the branch code manually for this bank."}
+                        </FormDescription>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                
+                <FormField
+                  control={bankDetailForm.control}
+                  name="isDefault"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-row items-start space-x-3 space-y-0 rounded-md border border-muted-foreground/20 p-4 bg-background shadow-sm transition-all duration-200 hover:shadow-md">
+                      <FormControl>
+                        <Checkbox
+                          checked={field.value}
+                          onCheckedChange={field.onChange}
+                          className="data-[state=checked]:bg-primary data-[state=checked]:text-white"
+                        />
+                      </FormControl>
+                      <div className="space-y-1 leading-none">
+                        <FormLabel className="text-base font-medium">
+                          Set as default payment method
+                        </FormLabel>
+                        <FormDescription className="text-muted-foreground">
+                          This bank account will be used for premium collections
+                        </FormDescription>
+                      </div>
+                    </FormItem>
+                  )}
+                />
+              </form>
+            </Form>
+          </CardContent>
+          <CardFooter className="flex justify-between">
+            <Button 
+              type="button"
+              variant="outline"
+              onClick={() => setStep(6)}
+            >
+              <ChevronLeft className="mr-2 h-4 w-4" /> Previous
+            </Button>
+            
+            <Button 
+              type="button"
+              onClick={handleBankDetailsStep}
+              disabled={createPolicyWithDependents.isPending}
+              className="bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary text-white font-medium px-6 shadow-lg transition-all duration-300 hover:shadow-xl"
+            >
+              {createPolicyWithDependents.isPending ? (
+                <><Loader2 className="mr-2 h-4 w-4 animate-spin" /> Processing...</>
+              ) : (
+                <><Check className="mr-2 h-4 w-4" /> Submit Application</>
+              )}
+            </Button>
+          </CardFooter>
+        </Card>
+      )}
+      
+    </div>
+  );
+}
