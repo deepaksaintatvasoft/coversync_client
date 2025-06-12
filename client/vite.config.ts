@@ -15,7 +15,15 @@ export default defineConfig({
     host: "0.0.0.0",
     port: 5000,
     strictPort: true,
-    hmr: false,
+    hmr: {
+      port: 5001,
+    },
+    cors: true,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
+    },
   },
   build: {
     outDir: "../dist",
